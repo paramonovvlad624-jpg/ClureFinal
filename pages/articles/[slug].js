@@ -14,7 +14,7 @@ const ARTICLE_NAV = [
 ]
 
 const queryBySlug = `*[_type == "article" && slug.current == $slug][0]{
-  _id, title, excerpt, body, publishedAt, mainImage, author->{name, slug, image}
+  _id, title, excerpt, body, publishedAt, mainImage, author->{name, slug, image}, playlist->{title, url, platform}
 }`
 
 const queryMore = `*[_type == "article" && slug.current != $slug] | order(publishedAt desc)[0...3]{
@@ -103,8 +103,25 @@ export default function ArticlePage({ article, moreArticles = [] }) {
           {/* ── Intro ── */}
           {article.excerpt && (
             <section className={styles.intro}>
-              <h2 className={styles.introLabel}>Intro</h2>
               <p className={styles.introText}>{article.excerpt}</p>
+            </section>
+          )}
+
+          {/* ── Playlist ── */}
+          {article.playlist?.url && (
+            <section className={styles.playlistSection}>
+              <a
+                href={article.playlist.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={styles.playlistLink}
+              >
+                <span className={styles.playlistIcon}>♫</span>
+                <span className={styles.playlistText}>
+                  <span className={styles.playlistTitle}>{article.playlist.title}</span>
+                  <span className={styles.playlistCta}>Слушать плейлист →</span>
+                </span>
+              </a>
             </section>
           )}
 

@@ -4,6 +4,7 @@
 .page {
   background: #87c1d3;
   min-height: 100vh;
+  padding-bottom: 10px;
 }
 
 /* Body container – flex column with 10px gaps between sections */
@@ -102,6 +103,56 @@
   min-width: 0;
 }
 
+/* ─── Playlist banner ─── */
+.playlistSection {
+  width: 100%;
+  padding: 0 10px;
+}
+
+.playlistLink {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 24px 32px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  text-decoration: none;
+  transition: background 120ms ease;
+}
+
+.playlistLink:hover {
+  background: rgba(255, 255, 255, 0.18);
+}
+
+.playlistIcon {
+  font-size: 32px;
+  color: #ffffff;
+  flex-shrink: 0;
+}
+
+.playlistText {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.playlistTitle {
+  font-family: var(--font-sans);
+  font-weight: 700;
+  font-size: 20px;
+  color: #ffffff;
+  letter-spacing: -0.02em;
+  font-feature-settings: 'ss01', 'ss03';
+}
+
+.playlistCta {
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.6);
+  letter-spacing: -0.02em;
+}
+
 /* ─── Article body section ─── */
 .articleSection {
   width: 100%;
@@ -152,7 +203,7 @@
   align-items: flex-start;
   justify-content: center;
   padding: 120px 40px;
-  background: #71b6cc;
+  background: rgba(0, 0, 0, 0.08);
   border-radius: 8px;
 }
 
@@ -331,5 +382,87 @@
 
   .moreCardContent {
     font-size: 16px;
+  }
+}
+
+/* ─── Author page layout ─── */
+.authorRow {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.authorAvatar {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.authorBio {
+  font-family: var(--font-sans);
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 1.5;
+  color: rgba(246, 248, 251, 0.85);
+  letter-spacing: -0.3px;
+  flex: 1;
+  min-width: 200px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.authorStats {
+  display: flex;
+  gap: 28px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.authorStat {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 600;
+  color: rgba(246, 248, 251, 0.6);
+  letter-spacing: -0.02em;
+  text-align: center;
+}
+
+.authorStatNum {
+  font-size: 28px;
+  font-weight: 700;
+  color: #f6f8fb;
+  display: block;
+}
+
+@media (max-width: 600px) {
+  .authorRow {
+    flex-direction: column;
+    gap: 16px;
+    text-align: center;
+  }
+
+  .authorAvatar {
+    width: 90px;
+    height: 90px;
+  }
+
+  .authorBio {
+    font-size: 16px;
+    min-width: 0;
+    text-align: center;
+    align-items: center;
+  }
+
+  .authorStats {
+    gap: 20px;
+  }
+
+  .authorStatNum {
+    font-size: 24px;
   }
 }

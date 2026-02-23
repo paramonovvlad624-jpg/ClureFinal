@@ -42,8 +42,10 @@ export default function PlaylistsPage({ playlists = [] }) {
             >
               <div className={s.info}>
                 <span className={s.title}>{p.title}</span>
-                {p.description && (
-                  <span className={s.description}>{p.description}</span>
+                {(p.author?.name || p.description) && (
+                  <span className={s.description}>
+                    {p.author?.name}{p.author?.name && p.description ? ' · ' : ''}{p.description}
+                  </span>
                 )}
               </div>
               {p.platform && PLATFORM_LABELS[p.platform] && (
@@ -64,7 +66,7 @@ export async function getStaticProps() {
   let playlists = []
   try {
     playlists = await client.fetch(
-      '*[_type == "playlist"] | order(order asc, _createdAt desc){_id, title, url, platform, description}'
+      '*[_type == "playlist"] | order(order asc, _createdAt desc){_id, title, url, platform, description, author->{name}}'
     )
   } catch (e) {
     // ignore if Sanity is not configured yet
