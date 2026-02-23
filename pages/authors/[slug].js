@@ -21,7 +21,7 @@ const queryArticlesByAuthor = `*[_type == "article" && author._ref == $authorId]
   _id, title, slug, publishedAt, mainImage, author->{name, image}
 }`
 
-const queryPlaylistCount = `count(*[_type == "playlist"])`
+const queryPlaylistCount = `count(*[_type == "playlist" && author._ref == $authorId])`
 
 export async function getStaticPaths() {
   const authors = await client.fetch(queryAllAuthors)
@@ -39,7 +39,7 @@ export async function getStaticProps({ params }) {
   }
 
   const articles = await client.fetch(queryArticlesByAuthor, { authorId: author._id })
-  const playlistCount = await client.fetch(queryPlaylistCount)
+  const playlistCount = await client.fetch(queryPlaylistCount, { authorId: author._id })
 
   return {
     props: { author, articles: articles || [], playlistCount: playlistCount || 0 },

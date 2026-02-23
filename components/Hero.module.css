@@ -8,6 +8,7 @@
   align-items: center;
   justify-content: center;
   overflow: hidden;
+  box-shadow: 0 8px 24px rgba(135, 193, 211, 0.5);
 }
 
 /* ─── Blurred background ─── */

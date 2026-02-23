@@ -10,8 +10,13 @@ export default function Hero({ title = 'Clure.', fontFamily }) {
     const el = brandRef.current
     if (!el) return
 
+    // Disable parallax on narrow viewports — mobile scroll events are
+    // batched during momentum scrolling which makes JS parallax janky.
+    const isMobile = () => window.innerWidth <= 600
+
     let ticking = false
     const onScroll = () => {
+      if (isMobile()) return
       if (!ticking) {
         ticking = true
         requestAnimationFrame(() => {
@@ -25,7 +30,12 @@ export default function Hero({ title = 'Clure.', fontFamily }) {
     }
 
     window.addEventListener('scroll', onScroll, { passive: true })
-    return () => window.removeEventListener('scroll', onScroll)
+    return () => {
+      window.removeEventListener('scroll', onScroll)
+      // Reset styles when cleaning up so resizing doesn't leave stale transforms
+      el.style.transform = ''
+      el.style.opacity = ''
+    }
   }, [])
 
   const brandClass = fontFamily === 'sans'
