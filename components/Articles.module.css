@@ -53,9 +53,8 @@
   transition: filter 300ms ease, transform 300ms ease;
 }
 
-/* Hover: blur + slight zoom */
+/* Hover: slight zoom (blur removed) */
 .card:hover .image {
-  filter: blur(12px);
   transform: scale(1.04);
 }
 
