@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import Link from 'next/link'
 import styles from './Navigation.module.css'
 
@@ -8,12 +9,31 @@ const DEFAULT_LINKS = [
 ]
 
 export default function Navigation({ links = DEFAULT_LINKS }) {
+  const [open, setOpen] = useState(false)
+
   return (
     <nav className={styles.nav} aria-label="Main navigation">
-      <ul className={styles.list}>
+      <button
+        className={styles.toggle}
+        onClick={() => setOpen((v) => !v)}
+        aria-expanded={open}
+        aria-label="Toggle navigation"
+      >
+        <span className={`${styles.bar} ${open ? styles.barOpen : ''}`} />
+        <span className={`${styles.bar} ${open ? styles.barOpen : ''}`} />
+        <span className={`${styles.bar} ${open ? styles.barOpen : ''}`} />
+      </button>
+
+      <ul className={`${styles.list} ${open ? styles.listOpen : ''}`}>
         {links.map((link) => (
           <li key={link.href}>
-            <Link href={link.href} className={styles.item}>{link.label}</Link>
+            <Link
+              href={link.href}
+              className={styles.item}
+              onClick={() => setOpen(false)}
+            >
+              {link.label}
+            </Link>
           </li>
         ))}
       </ul>

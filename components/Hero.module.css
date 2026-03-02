@@ -56,8 +56,8 @@
 
 @media (max-width: 600px) {
   .hero {
-    min-height: 50svh;
-    min-height: 50vh;
+    min-height: 100svh;
+    min-height: 100vh;
   }
   .brand {
     font-size: clamp(64px, 20vw, 100px);
