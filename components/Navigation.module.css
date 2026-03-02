@@ -15,23 +15,26 @@
   width: 40px;
   height: 40px;
   padding: 8px;
-  background: #ffffff;
-  border: none;
+  background: rgba(142, 180, 199, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 12px;
   cursor: pointer;
-  filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.15));
+  backdrop-filter: blur(4px);
   z-index: 101;
   position: relative;
+  transition: background 200ms ease;
 }
 
 .toggle:hover {
-  background: #f0f0f0;
+  background: rgba(246, 248, 251, 0.9);
 }
 
-.bar {
+.bar,
+.barOpen {
   display: block;
   width: 100%;
   height: 2px;
-  background: #0f0e0e;
+  background: #ffffff;
   transition: transform 200ms ease, opacity 200ms ease;
 }
 
@@ -49,14 +52,11 @@
 
 .list {
   list-style: none;
-  margin: 0;
+  margin: 6px 0 0;
   padding: 0;
   display: flex;
   flex-direction: column;
-  gap: 4px;
-  align-items: flex-start;
-  filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.15));
-  margin-top: 4px;
+  gap: 6px;
   max-height: 0;
   overflow: hidden;
   opacity: 0;
@@ -64,27 +64,42 @@
 }
 
 .listOpen {
-  max-height: 300px;
+  max-height: 260px;
   opacity: 1;
+  overflow: visible;
 }
 
 .item {
-  display: block;
-  padding: 10px 12px;
-  background: #ffffff;
-  color: #0f0e0e;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 18px 20px;
+  width: 100%;
+  background: rgba(142, 180, 199, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  color: #ffffff;
   text-decoration: none;
   font-family: var(--font-sans);
-  font-weight: 500;
-  font-size: 16px;
-  line-height: 1.4;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 1.25;
   letter-spacing: -0.02em;
-  white-space: nowrap;
-  transition: background 120ms ease;
+  border-radius: 12px;
+  transition: background 120ms ease, transform 120ms ease;
+}
+
+.item::after {
+  content: '→';
+  font-size: 18px;
+  color: rgba(255, 255, 255, 0.6);
+  transition: transform 120ms ease;
 }
 
 .item:hover {
-  background: #f0f0f0;
+  background: rgba(246, 248, 251, 0.9);
+  color: #7fbacd;
+  transform: translateX(4px);
 }
 
 /* Mobile: smaller toggle, full-width dropdown */
@@ -101,15 +116,8 @@
     gap: 4px;
   }
 
-  .list {
-    flex-direction: column;
-    gap: 2px;
-    margin-top: 2px;
-  }
-
   .item {
-    font-size: 15px;
-    padding: 10px 14px;
-    min-width: 140px;
+    font-size: 16px;
+    padding: 14px 16px;
   }
 }

@@ -97,7 +97,7 @@ export default function ArticlesPage({ articles = [] }) {
         </div>
       </div>
 
-      <main style={{ paddingBottom: 10 }}>
+      <main style={{ paddingBottom: 0 }}>
         <ArticlesList items={filtered} max={100} showAllButton={false} />
       </main>
       <Footer />

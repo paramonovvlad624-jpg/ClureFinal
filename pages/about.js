@@ -30,7 +30,7 @@ export default function AboutPage({ authors = [] }) {
           <img src={BG_URL} alt="" className={s.bgImg} />
         </div>
         <div className={s.content}>
-          <p className={s.heading}>
+          <p className={s.lead}>
             Clure - это творческое музыкальное объединение, возникшее в Москве в 2025 году.
           </p>
           <p className={s.text}>

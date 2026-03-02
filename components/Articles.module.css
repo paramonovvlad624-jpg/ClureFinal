@@ -2,7 +2,7 @@
 .wrapper {
   width: 100%;
   margin: 0 auto;
-  padding: 0 24px;
+  padding: 0 24px 0;
   background: #87c1d3;
 }
 
@@ -11,7 +11,7 @@
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 10px;
-  padding: 10px;
+  padding: 10px 24px 0;
 }
 
 /* Single card: center it with landscape ratio */
@@ -78,18 +78,19 @@
 /* White content box at the bottom */
 .content {
   position: absolute;
-  bottom: 8px;
-  left: 8px;
-  right: 8px;
-  background: #ffffff;
-  padding: 12px;
+  bottom: 10px;
+  left: 12px;
+  right: 12px;
+  background: #8eb4c7;
+  padding: 12px 14px;
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
-  gap: 0;
-  height: 80px;
+  justify-content: center;
+  gap: 3px;
+  min-height: 68px;
   box-sizing: border-box;
-  border-radius: 0;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.65);
 }
 
 .title {
@@ -98,7 +99,7 @@
   font-size: 16px;
   line-height: 1.4;
   letter-spacing: -0.02em;
-  color: #0f0e0e;
+  color: #f6f8fb;
   word-break: break-word;
   overflow: hidden;
   display: -webkit-box;
@@ -115,7 +116,7 @@
   font-size: 16px;
   line-height: 1.4;
   letter-spacing: -0.02em;
-  color: #0f0e0e;
+  color: #f6f8fb;
 }
 
 .dot {
@@ -129,7 +130,7 @@
   font-size: 16px;
   line-height: 1.4;
   letter-spacing: -0.02em;
-  color: #0f0e0e;
+  color: #f6f8fb;
 }
 
 .authorLink {
@@ -138,7 +139,7 @@
   font-size: 16px;
   line-height: 1.4;
   letter-spacing: -0.02em;
-  color: #0f0e0e;
+  color: #f6f8fb;
   text-decoration: none;
   position: relative;
   z-index: 2;
@@ -154,14 +155,12 @@
   align-items: center;
   justify-content: center;
   width: 100%;
-  margin-left: auto;
-  margin-right: auto;
-  padding: 32px 24px;
-  margin-top: 10px;
-  background: #7fbacd;
-  border: 5px solid #ffffff;
+  margin: 10px auto 0;
+  padding: 28px 0;
+  background: rgba(0, 0, 0, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.3);
   border-radius: 10px;
-  color: #f6f8fb;
+  color: #ffffff;
   font-family: var(--font-sans);
   font-weight: 900;
   font-size: clamp(40px, 5.5vw, 80px);
@@ -176,6 +175,7 @@
 .allButton:hover {
   background: #f6f8fb;
   color: #7fbacd;
+  border-color: #7fbacd;
 }
 
 /* ─── Responsive ─── */
@@ -206,7 +206,7 @@
   .allButton {
     font-size: clamp(32px, 9vw, 56px);
     padding: 24px 16px;
-    margin-top: 6px;
+    margin-top: 4px;
   }
 }
 
