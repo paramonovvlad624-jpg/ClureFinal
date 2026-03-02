@@ -7,6 +7,7 @@ import Navigation from '../../components/Navigation'
 import ArticlesList from '../../components/ArticlesList'
 import Footer from '../../components/Footer'
 import styles from '../../components/ArticlePage.module.css'
+import s from '../../components/Playlists.module.css'
 
 const AUTHOR_NAV = [
   { href: '/', label: 'Главная' },
@@ -22,6 +23,10 @@ const queryArticlesByAuthor = `*[_type == "article" && author._ref == $authorId]
 }`
 
 const queryPlaylistCount = `count(*[_type == "playlist" && author._ref == $authorId])`
+
+const queryPlaylistsByAuthor = `*[_type == "playlist" && author._ref == $authorId] | order(order asc, _createdAt desc){
+  _id, title, url, platform, description
+}`
 
 export async function getStaticPaths() {
   const authors = await client.fetch(queryAllAuthors)
@@ -40,14 +45,15 @@ export async function getStaticProps({ params }) {
 
   const articles = await client.fetch(queryArticlesByAuthor, { authorId: author._id })
   const playlistCount = await client.fetch(queryPlaylistCount, { authorId: author._id })
+  const playlists = await client.fetch(queryPlaylistsByAuthor, { authorId: author._id })
 
   return {
-    props: { author, articles: articles || [], playlistCount: playlistCount || 0 },
+    props: { author, articles: articles || [], playlistCount: playlistCount || 0, playlists: playlists || [] },
     revalidate: 60,
   }
 }
 
-export default function AuthorPage({ author, articles = [], playlistCount = 0 }) {
+export default function AuthorPage({ author, articles = [], playlistCount = 0, playlists = [] }) {
   const imageUrl = author.image
     ? urlFor(author.image).width(400).height(400).auto('format').url()
     : null
@@ -126,6 +132,41 @@ export default function AuthorPage({ author, articles = [], playlistCount = 0 })
             }}>
               <div style={{ width: '100%', maxWidth: 900 }}>
                 <ArticlesList items={articles} max={100} showAllButton={false} />
+              </div>
+            </section>
+          )}
+
+          {/* ── Author's playlists ── */}
+          {playlists.length > 0 && (
+            <section style={{ width: '100%', maxWidth: 900, margin: '0 auto' }}>
+              <div className={s.list}>
+                {playlists.map((p) => (
+                  <a
+                    key={p._id}
+                    href={p.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={s.item}
+                  >
+                    <div className={s.info}>
+                      <span className={s.title}>{p.title}</span>
+                      {p.description && (
+                        <span className={s.description}>{p.description}</span>
+                      )}
+                    </div>
+                    {p.platform && (
+                      <span className={s.platform}>
+                        {{
+                          spotify: 'Spotify',
+                          'apple-music': 'Apple Music',
+                          'youtube-music': 'YouTube Music',
+                          'yandex-music': 'Яндекс Музыка',
+                        }[p.platform] || ''}
+                      </span>
+                    )}
+                    <span className={s.arrow}>→</span>
+                  </a>
+                ))}
               </div>
             </section>
           )}

@@ -23,34 +23,32 @@ export default function AboutPage({ authors = [] }) {
         <title>О нас — Clure</title>
       </Head>
       <Navigation links={ABOUT_NAV} />
-      <Hero title="О нас." fontFamily="sans" />
+      <Hero title="О нас." fontFamily="sans" scrollTarget="about-content" />
 
-      <div className={s.wrapper}>
+      <div id="about-content" className={s.wrapper}>
         <div className={s.bg} aria-hidden="true">
           <img src={BG_URL} alt="" className={s.bgImg} />
         </div>
         <div className={s.content}>
-          <h2 className={s.heading}>Что такое Clure?</h2>
-          <p className={s.text}>
-            Clure — это творческое объединение, концентрирующееся вокруг музыки. 
-            Мы пишем статьи и организовываем фестивали.
+          <p className={s.heading}>
+            Clure - это творческое музыкальное объединение, возникшее в Москве в 2025 году.
           </p>
           <p className={s.text}>
-            Связаться с нами можно через{' '}
-            <a
-              href="https://t.me/cluremag"
-              target="_blank"
-              rel="noopener noreferrer"
-              className={s.link}
-            >
-              Telegram
-            </a>.
+            Мы<br />
+            организовываем концерты<br />
+            пишем статьи<br />
+            собираем плейлисты<br />
+            снимаем живые выступления<br />
+            любим музыку.
+          </p>
+          <p className={s.text}>
+            Designed, assembled, and made in moscow.
           </p>
         </div>
 
         {authors.length > 0 && (
           <div className={s.content} style={{ marginTop: 10 }}>
-            <h2 className={s.heading}>Наша команда</h2>
+            <h2 className={s.heading}>MEET THE TEAM</h2>
             <div className={s.authors}>
               {authors.map((a) => {
                 const avatar = a.image

@@ -26,12 +26,12 @@ export default function PlaylistsPage({ playlists = [] }) {
         <title>Плейлисты — Clure</title>
       </Head>
       <Navigation links={PLAYLISTS_NAV} />
-      <Hero title="Плейлисты." fontFamily="sans" />
+      <Hero title="Плейлисты." fontFamily="sans" scrollTarget="playlists-content" />
 
       {playlists.length === 0 ? (
         <p className={s.empty}>Скоро здесь появятся плейлисты</p>
       ) : (
-        <div className={s.list}>
+        <div id="playlists-content" className={s.list}>
           {playlists.map((p) => (
             <a
               key={p._id}

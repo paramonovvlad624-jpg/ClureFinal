@@ -6,7 +6,7 @@ export default function ArticlesList({ items = [], max = 4, showAllButton = true
   const showPlaceholders = list.length === 0
 
   return (
-    <div className={styles.wrapper}>
+    <div className={styles.wrapper} id="articles">
       <div className={styles.grid}>
         {showPlaceholders
           ? new Array(4).fill(0).map((_, i) => (

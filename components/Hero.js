@@ -3,7 +3,7 @@ import styles from './Hero.module.css'
 
 const BG_URL = '/images/bg.png'
 
-export default function Hero({ title = 'Clure.', fontFamily }) {
+export default function Hero({ title = 'Clure.', fontFamily, scrollTarget = 'articles' }) {
   const brandRef = useRef(null)
 
   useEffect(() => {
@@ -42,6 +42,13 @@ export default function Hero({ title = 'Clure.', fontFamily }) {
     ? `${styles.brand} ${styles.brandSans}`
     : styles.brand
 
+  const handleClick = () => {
+    const target = document.getElementById(scrollTarget)
+    if (target) {
+      target.scrollIntoView({ behavior: 'smooth' })
+    }
+  }
+
   return (
     <section className={styles.hero} aria-label="Hero">
       {/* Blurred background image */}
@@ -49,7 +56,16 @@ export default function Hero({ title = 'Clure.', fontFamily }) {
         <img src={BG_URL} alt="" className={styles.bgImg} />
       </div>
       {/* Brand / Page title */}
-      <div ref={brandRef} className={brandClass} aria-label={title}>
+      <div
+        ref={brandRef}
+        className={brandClass}
+        aria-label={title}
+        onClick={handleClick}
+        role="button"
+        tabIndex={0}
+        onKeyDown={(e) => { if (e.key === 'Enter') handleClick() }}
+        style={{ cursor: 'pointer' }}
+      >
         {fontFamily === 'sans' && title.endsWith('.') ? (
           <>{title.slice(0, -1)}<span className={styles.brandDot}>.</span></>
         ) : (

@@ -1,15 +1,15 @@
 /* ─── Article grid wrapper ─── */
 .wrapper {
   width: 100%;
-  max-width: 1280px;
   margin: 0 auto;
+  padding: 0 24px;
   background: #87c1d3;
 }
 
-/* 2-column full-bleed grid */
+/* 4-column full-bleed grid */
 .grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(4, 1fr);
   gap: 10px;
   padding: 10px;
 }
@@ -94,12 +94,11 @@
 
 .title {
   font-family: var(--font-sans);
-  font-weight: 600;
-  font-size: 20px;
+  font-weight: 500;
+  font-size: 16px;
   line-height: 1.4;
   letter-spacing: -0.02em;
   color: #0f0e0e;
-  font-feature-settings: 'ss01', 'ss03';
   word-break: break-word;
   overflow: hidden;
   display: -webkit-box;
@@ -112,12 +111,11 @@
   align-items: center;
   gap: 4px;
   font-family: var(--font-sans);
-  font-weight: 600;
-  font-size: 20px;
+  font-weight: 500;
+  font-size: 16px;
   line-height: 1.4;
   letter-spacing: -0.02em;
   color: #0f0e0e;
-  font-feature-settings: 'ss01', 'ss03';
 }
 
 .dot {
@@ -127,22 +125,20 @@
 /* Author name in meta row */
 .author {
   font-family: var(--font-sans);
-  font-weight: 600;
-  font-size: 20px;
+  font-weight: 500;
+  font-size: 16px;
   line-height: 1.4;
   letter-spacing: -0.02em;
   color: #0f0e0e;
-  font-feature-settings: 'ss01', 'ss03';
 }
 
 .authorLink {
   font-family: var(--font-sans);
-  font-weight: 600;
-  font-size: 20px;
+  font-weight: 500;
+  font-size: 16px;
   line-height: 1.4;
   letter-spacing: -0.02em;
   color: #0f0e0e;
-  font-feature-settings: 'ss01', 'ss03';
   text-decoration: none;
   position: relative;
   z-index: 2;
@@ -158,7 +154,6 @@
   align-items: center;
   justify-content: center;
   width: 100%;
-  max-width: 1280px;
   margin-left: auto;
   margin-right: auto;
   padding: 32px 24px;
@@ -174,7 +169,6 @@
   letter-spacing: -0.02em;
   text-decoration: none;
   text-align: center;
-  font-feature-settings: 'ss01', 'ss03';
   transition: background 120ms ease, color 120ms ease;
   box-sizing: border-box;
 }
@@ -186,16 +180,19 @@
 
 /* ─── Responsive ─── */
 @media (max-width: 600px) {
+  .wrapper {
+    padding: 0 6px;
+  }
   .grid {
     grid-template-columns: 1fr;
     gap: 6px;
-    padding: 6px 6px 0;
+    padding: 6px 0 0;
   }
   .card {
-    aspect-ratio: 5 / 4;
+    aspect-ratio: 1 / 1;
   }
   .card:only-child {
-    aspect-ratio: 5 / 4;
+    aspect-ratio: 1 / 1;
     max-width: 100%;
   }
   .content {
@@ -203,7 +200,7 @@
     min-height: 56px;
     padding: 8px 12px;
   }
-  .title, .meta, .author {
+  .title, .meta, .author, .authorLink {
     font-size: 14px;
   }
   .allButton {
@@ -217,7 +214,7 @@
   .card {
     aspect-ratio: 4 / 5;
   }
-  .title, .meta, .author {
+  .title, .meta, .author, .authorLink {
     font-size: 17px;
   }
 }

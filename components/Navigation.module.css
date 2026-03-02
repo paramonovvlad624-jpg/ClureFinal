@@ -75,11 +75,10 @@
   color: #0f0e0e;
   text-decoration: none;
   font-family: var(--font-sans);
-  font-weight: 600;
-  font-size: 20px;
+  font-weight: 500;
+  font-size: 16px;
   line-height: 1.4;
   letter-spacing: -0.02em;
-  font-feature-settings: 'ss01', 'ss03';
   white-space: nowrap;
   transition: background 120ms ease;
 }

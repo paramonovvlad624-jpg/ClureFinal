@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Tilt+Warp:ital@0;1&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,600;0,9..40,700;1,9..40,400&subset=cyrillic&display=swap');
 
 :root {
   --color-text: #0f0e0e;
@@ -6,6 +7,7 @@
   --color-accent: #7fbacd;
   --font-display: 'Tilt Warp', sans-serif;
   --font-sans: 'Geist Sans', 'Geist', ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-card: 'DM Sans', ui-sans-serif, system-ui, sans-serif;
 }
 
 *, *::before, *::after { box-sizing: border-box; }

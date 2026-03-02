@@ -90,7 +90,6 @@
   line-height: 1.4;
   letter-spacing: -0.4px;
   color: var(--color-white);
-  font-feature-settings: 'ss01', 'ss03';
 }
 
 .introLabel {
@@ -142,7 +141,6 @@
   font-size: 20px;
   color: #ffffff;
   letter-spacing: -0.02em;
-  font-feature-settings: 'ss01', 'ss03';
 }
 
 .playlistCta {
@@ -177,7 +175,6 @@
   letter-spacing: -0.4px;
   color: #ffffff;
   text-align: justify;
-  font-feature-settings: 'ss01', 'ss03';
   white-space: pre-wrap;
 }
 
@@ -261,7 +258,6 @@
   font-size: 20px;
   line-height: 1.4;
   letter-spacing: -0.4px;
-  font-feature-settings: 'ss01', 'ss03';
 }
 
 .moreCardTitle {

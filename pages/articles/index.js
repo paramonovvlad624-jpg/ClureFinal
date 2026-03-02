@@ -16,6 +16,7 @@ const ARTICLES_NAV = [
 export default function ArticlesPage({ articles = [] }) {
   const [authorFilter, setAuthorFilter] = useState('all')
   const [dateSort, setDateSort] = useState('newest')
+  const [filtersOpen, setFiltersOpen] = useState(false)
 
   const authors = useMemo(() => {
     const names = [...new Set(articles.map((a) => a.author?.name).filter(Boolean))]
@@ -41,10 +42,20 @@ export default function ArticlesPage({ articles = [] }) {
         <title>Статьи — Clure</title>
       </Head>
       <Navigation links={ARTICLES_NAV} />
-      <Hero title="Статьи." fontFamily="sans" />
+      <Hero title="Статьи." fontFamily="sans" scrollTarget="articles-filter" />
 
       {/* ── Filters ── */}
-      <div className={filterStyles.bar}>
+      <div id="articles-filter" className={filterStyles.bar}>
+        <button
+          className={filterStyles.toggle}
+          onClick={() => setFiltersOpen((v) => !v)}
+          aria-expanded={filtersOpen}
+        >
+          <span className={filterStyles.toggleLabel}>Фильтры</span>
+          <span className={`${filterStyles.toggleIcon} ${filtersOpen ? filterStyles.toggleIconOpen : ''}`}>+</span>
+        </button>
+        <div className={`${filterStyles.content} ${filtersOpen ? filterStyles.contentOpen : ''}`}>
+        <div className={filterStyles.contentInner}>
         <div className={filterStyles.group}>
           <span className={filterStyles.label}>Автор</span>
           <div className={filterStyles.pills}>
@@ -82,9 +93,11 @@ export default function ArticlesPage({ articles = [] }) {
             </button>
           </div>
         </div>
+        </div>
+        </div>
       </div>
 
-      <main>
+      <main style={{ paddingBottom: 10 }}>
         <ArticlesList items={filtered} max={100} showAllButton={false} />
       </main>
       <Footer />

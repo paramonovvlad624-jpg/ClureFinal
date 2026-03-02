@@ -37,7 +37,6 @@
   line-height: 1.3;
   letter-spacing: -0.02em;
   color: #ffffff;
-  font-feature-settings: 'ss01', 'ss03';
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
