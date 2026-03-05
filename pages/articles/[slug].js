@@ -47,12 +47,11 @@ export async function getStaticProps({ params }) {
   ])
 
   if (!article) {
-    return { notFound: true, revalidate: 60 }
+    return { notFound: true }
   }
 
   return {
     props: { article, moreArticles: moreArticles || [] },
-    revalidate: 60,
   }
 }
 

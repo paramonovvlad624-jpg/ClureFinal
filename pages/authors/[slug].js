@@ -40,7 +40,7 @@ export async function getStaticProps({ params }) {
   const author = (allAuthors || []).find((a) => slugify(a.name) === urlSlug) || null
 
   if (!author) {
-    return { notFound: true, revalidate: 60 }
+    return { notFound: true }
   }
 
   const articles = await client.fetch(queryArticlesByAuthor, { authorId: author._id })
@@ -49,7 +49,6 @@ export async function getStaticProps({ params }) {
 
   return {
     props: { author, articles: articles || [], playlistCount: playlistCount || 0, playlists: playlists || [] },
-    revalidate: 60,
   }
 }
 
