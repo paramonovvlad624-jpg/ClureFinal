@@ -80,5 +80,5 @@ export async function getStaticProps() {
   } catch (e) {
     // ignore
   }
-  return { props: { authors: authors || [] }, revalidate: 60 }
+  return { props: { authors: authors || [] } }
 }
