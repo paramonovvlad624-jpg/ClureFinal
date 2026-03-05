@@ -74,5 +74,5 @@ export async function getStaticProps() {
   } catch (e) {
     // ignore if Sanity is not configured yet
   }
-  return { props: { playlists: playlists || [] } }
+  return { props: { playlists: playlists || [] }, revalidate: 60 }
 }
