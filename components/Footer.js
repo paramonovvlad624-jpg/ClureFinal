@@ -22,9 +22,9 @@ export default function Footer() {
           <div className={styles.col}>
             <span className={styles.label}>ссылки</span>
             <ul className={styles.list}>
-              <li><a href="/articles">Статьи</a></li>
-              <li><a href="/playlists">Плейлисты</a></li>
-              <li><a href="/about">О нас</a></li>
+              <li><Link href="/articles">Статьи</Link></li>
+              <li><Link href="/playlists">Плейлисты</Link></li>
+              <li><Link href="/about">О нас</Link></li>
             </ul>
           </div>
           <div className={styles.col}>

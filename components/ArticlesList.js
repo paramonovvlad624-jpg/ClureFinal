@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import styles from './Articles.module.css'
 import ArticleCard from './ArticleCard'
 
@@ -25,9 +26,9 @@ export default function ArticlesList({ items = [], max = 4, showAllButton = true
             ))}
       </div>
       {showAllButton && (
-        <a href="/articles" className={styles.allButton}>
+        <Link href="/articles" className={styles.allButton}>
           Все статьи
-        </a>
+        </Link>
       )}
     </div>
   )
