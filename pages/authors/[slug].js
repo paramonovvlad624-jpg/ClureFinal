@@ -31,7 +31,7 @@ const queryPlaylistsByAuthor = `*[_type == "playlist" && author._ref == $authorI
 export async function getStaticPaths() {
   const authors = await client.fetch(queryAllAuthors)
   const paths = (authors || []).map((a) => ({ params: { slug: slugify(a.name) } }))
-  return { paths, fallback: 'blocking' }
+  return { paths, fallback: false }
 }
 
 export async function getStaticProps({ params }) {
@@ -92,13 +92,6 @@ export default function AuthorPage({ author, articles = [], playlistCount = 0, p
                 />
               )}
               <h1 className={styles.articleTitle} style={{ fontSize: 'clamp(48px, 10vw, 90px)', margin: 0 }}>{author.name}</h1>
-              {author.bio && (
-                <div className={styles.authorBio}>
-                  {author.bio.split('\n').filter(Boolean).map((p, i) => (
-                    <span key={i}>{p}</span>
-                  ))}
-                </div>
-              )}
             </div>
 
             {/* Spotify link */}

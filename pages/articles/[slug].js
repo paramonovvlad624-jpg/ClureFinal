@@ -36,7 +36,7 @@ function formatShortDate(dateStr) {
 export async function getStaticPaths() {
   const slugs = await client.fetch(`*[_type == "article" && defined(slug.current)]{ "slug": slug.current }`)
   const paths = (slugs || []).map((s) => ({ params: { slug: s.slug } }))
-  return { paths, fallback: 'blocking' }
+  return { paths, fallback: false }
 }
 
 export async function getStaticProps({ params }) {
