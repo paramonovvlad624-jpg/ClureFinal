@@ -157,19 +157,37 @@
 }
 
 .tape {
+  position: relative;
   width: 100%;
   max-width: 900px;
+  aspect-ratio: 2480 / 1706;
   height: auto;
-  display: block;
-  margin-top: -7em;
+  margin-top: 10em;
   pointer-events: none;
   user-select: none;
 }
 
+.tapePiece {
+  position: absolute;
+  height: auto;
+  display: block;
+  pointer-events: auto;
+  transition: filter 80ms ease;
+}
+
+.tapePiece:active {
+  filter: brightness(1.35) saturate(0.8);
+}
+
+.piece1 { left: 12.06%; top: 3.52%;  width: 74.23%; }
+.piece2 { left: 3.27%;  top: calc(25.91% + 30px); width: 91.94%; }
+.piece3 { left: 1.53%;  top: calc(50.53% + 60px); width: 45.93%; }
+.piece4 { left: 52.78%; top: calc(50.53% + 60px); width: 45.69%; }
+
 @media (min-width: 1280px) {
   .tape {
-    margin-top: -10em;
-    max-width: 700px;
+    margin-top: 10em;
+    max-width: 900px;
   }
 }
 
@@ -188,23 +206,39 @@
 }
 
 .ticketBtn {
-  font-family: 'Kenoky', 'Times New Roman', Georgia, serif;
-  font-size: clamp(32px, 5vw, 80px);
-  font-weight: 700;
-  letter-spacing: 0.06em;
-  color: #ffffff !important;
-  background: #1b40b0 !important;
-  background-color: #1b40b0 !important;
+  background: none !important;
+  background-color: transparent !important;
   border: none !important;
-  border-radius: 12px;
-  padding: 40px 140px;
+  box-shadow: none !important;
+  padding: 0;
   cursor: pointer;
-  transition: background 150ms ease;
+  display: block;
+  width: 100%;
+  max-width: 600px;
 }
 
-.ticketBtn:hover {
-  background: #2d52c8 !important;
-  background-color: #2d52c8 !important;
+.ticketBtnImg {
+  display: block;
+  width: 100%;
+  height: auto;
+  filter: drop-shadow(0 0 0 transparent);
+  transition: filter 120ms ease, transform 120ms ease;
+}
+
+.ticketBtn:hover .ticketBtnImg {
+  filter: brightness(1.1);
+  transform: scale(1.03);
+}
+
+.ticketBtn:active .ticketBtnImg {
+  filter: brightness(1.35) saturate(0.8);
+  transform: scale(0.98);
+}
+
+@media (max-width: 600px) {
+  .ticketBtn {
+    max-width: 100%;
+  }
 }
 
 

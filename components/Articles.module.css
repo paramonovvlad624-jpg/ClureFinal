@@ -152,6 +152,41 @@
   text-decoration: underline;
 }
 
+/* ─── Decorative filler cell ─── */
+.filler {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+}
+
+.fillerImg {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+  display: block;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* desktop (4-col) fillers: visible only on ≥901px */
+.fillerDesktop { display: flex; }
+.fillerTablet  { display: none; }
+
+@media (min-width: 601px) and (max-width: 900px) {
+  .fillerDesktop { display: none; }
+  .fillerTablet  { display: flex; }
+}
+
+@media (max-width: 600px) {
+  .fillerDesktop { display: none; }
+  .fillerTablet  { display: none; }
+}
+
 /* ─── "Все статьи" button ─── */
 .allButton {
   display: flex;
@@ -214,10 +249,22 @@
 }
 
 @media (min-width: 601px) and (max-width: 900px) {
+  .wrapper {
+    padding: 0 12px;
+  }
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+    padding: 8px 0 0;
+  }
   .card {
-    aspect-ratio: 4 / 5;
+    aspect-ratio: 1 / 1;
+  }
+  .content {
+    min-height: 60px;
+    padding: 10px 13px;
   }
   .title, .meta, .author, .authorLink {
-    font-size: 17px;
+    font-size: 15px;
   }
 }

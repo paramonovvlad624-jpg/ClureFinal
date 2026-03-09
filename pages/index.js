@@ -14,25 +14,6 @@ export default function Home({ page, articles = [] }) {
     <>
       <Head>
         <title>{title}</title>
-        <style>{`
-          #buy-ticket-btn-home {
-            background: #1b40b0 !important;
-            background-color: #1b40b0 !important;
-            color: #ffffff !important;
-            font-family: 'Kenoky', 'Times New Roman', Georgia, serif !important;
-            font-size: clamp(18px, 2vw, 32px) !important;
-            font-weight: 700 !important;
-            letter-spacing: 0.06em !important;
-            border: none !important;
-            border-radius: 8px !important;
-            padding: 18px 64px !important;
-            cursor: pointer !important;
-          }
-          #buy-ticket-btn-home:hover {
-            background: #2d52c8 !important;
-            background-color: #2d52c8 !important;
-          }
-        `}</style>
       </Head>
       <Navigation />
       <Hero />
@@ -52,10 +33,11 @@ export default function Home({ page, articles = [] }) {
             id="buy-ticket-btn-home"
             type="button"
             className={styles.ticketBtn}
+            style={{ marginTop: '24px' }}
             data-tc-event="69acc131c2a0a8102c515693"
             data-tc-token="eyJhbGciOiJIUzI1NiIsImlzcyI6InRpY2tldHNjbG91ZC5ydSIsInR5cCI6IkpXVCJ9.eyJwIjoiNjlhNzI4NWI4YWQwMTllNzFlODljMjliIn0.7Oreh61Lt5J0lbo4pXAw37BV6uokCjEzuLQNCjcs7ZQ"
           >
-            Купить билет
+            <img src="/images/Buyticketlong.png" alt="Купить билет" className={styles.ticketBtnImg} />
           </button>
         </div>
       </section>

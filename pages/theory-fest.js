@@ -19,23 +19,6 @@ export default function TheoryFestPage() {
         <meta name="theme-color" content="#1b40b0" />
         <style>{`
           html, body { background: #1b40b0 !important; }
-          #buy-ticket-btn {
-            background: #1b40b0 !important;
-            background-color: #1b40b0 !important;
-            color: #ffffff !important;
-            font-family: 'Kenoky', 'Times New Roman', Georgia, serif !important;
-            font-size: clamp(18px, 2vw, 32px) !important;
-            font-weight: 700 !important;
-            letter-spacing: 0.06em !important;
-            border: none !important;
-            border-radius: 8px !important;
-            padding: 18px 64px !important;
-            cursor: pointer !important;
-          }
-          #buy-ticket-btn:hover {
-            background: #2d52c8 !important;
-            background-color: #2d52c8 !important;
-          }
         `}</style>
       </Head>
 
@@ -50,7 +33,12 @@ export default function TheoryFestPage() {
             <span>москва<span className={styles.serifComma}>,</span><br className={styles.mobileBr} /> <a href="https://t.me/npo_melody" target="_blank" rel="noopener noreferrer" className={styles.infoLink}>нпо мелодия</a></span>
             <span>18+</span>
           </div>
-          <img src="/images/tape.png" alt="" className={styles.tape} />
+          <div className={styles.tape}>
+            <img src="/images/1-new.png" alt="" className={`${styles.tapePiece} ${styles.piece1}`} />
+            <img src="/images/2.png" alt="" className={`${styles.tapePiece} ${styles.piece2}`} />
+            <img src="/images/3.png" alt="" className={`${styles.tapePiece} ${styles.piece3}`} />
+            <img src="/images/4.png" alt="" className={`${styles.tapePiece} ${styles.piece4}`} />
+          </div>
         </header>
 
         <div className={styles.ticketSection}>
@@ -61,7 +49,7 @@ export default function TheoryFestPage() {
             data-tc-event="69acc131c2a0a8102c515693"
             data-tc-token="eyJhbGciOiJIUzI1NiIsImlzcyI6InRpY2tldHNjbG91ZC5ydSIsInR5cCI6IkpXVCJ9.eyJwIjoiNjlhNzI4NWI4YWQwMTllNzFlODljMjliIn0.7Oreh61Lt5J0lbo4pXAw37BV6uokCjEzuLQNCjcs7ZQ"
           >
-            Купить билет
+            <img src="/images/Buyticketlong.png" alt="Купить билет" className={styles.ticketBtnImg} />
           </button>
         </div>
       </div>
