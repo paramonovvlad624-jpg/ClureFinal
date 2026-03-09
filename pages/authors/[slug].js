@@ -92,7 +92,7 @@ export default function AuthorPage({ author, articles = [], playlistCount = 0, p
                   className={styles.authorAvatar}
                 />
               )}
-              <h1 className={styles.articleTitle} style={{ fontSize: 'clamp(48px, 10vw, 90px)', margin: 0 }}>{author.name}</h1>
+              <h1 className={styles.articleTitle} style={{ fontSize: 'clamp(48px, 10vw, 90px)', margin: 0, fontFamily: 'var(--font-sans)', fontWeight: 900, letterSpacing: '-0.02em' }}>{author.name}</h1>
             </div>
 
             {/* Spotify link */}
