@@ -1,9 +1,11 @@
 import Head from 'next/head'
+import Script from 'next/script'
 import client from '../lib/sanity'
 import Navigation from '../components/Navigation'
 import Hero from '../components/Hero'
 import ArticlesList from '../components/ArticlesList'
 import Footer from '../components/Footer'
+import styles from '../components/TheoryFest.module.css'
 
 export default function Home({ page, articles = [] }) {
   const title = page?.title || 'Clure.'
@@ -12,13 +14,58 @@ export default function Home({ page, articles = [] }) {
     <>
       <Head>
         <title>{title}</title>
+        <style>{`
+          #buy-ticket-btn-home {
+            background: #1b40b0 !important;
+            background-color: #1b40b0 !important;
+            color: #ffffff !important;
+            font-family: 'Kenoky', 'Times New Roman', Georgia, serif !important;
+            font-size: clamp(18px, 2vw, 32px) !important;
+            font-weight: 700 !important;
+            letter-spacing: 0.06em !important;
+            border: none !important;
+            border-radius: 8px !important;
+            padding: 18px 64px !important;
+            cursor: pointer !important;
+          }
+          #buy-ticket-btn-home:hover {
+            background: #2d52c8 !important;
+            background-color: #2d52c8 !important;
+          }
+        `}</style>
       </Head>
       <Navigation />
       <Hero />
       <main style={{ background: '#87c1d3' }}>
         <ArticlesList items={articles} />
       </main>
+
+      <section className={styles.page} style={{ minHeight: 'unset' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '3vw', padding: '60px 24px 60px', textAlign: 'center' }}>
+          <h2 className={styles.title} style={{ fontSize: 'clamp(36px, 7vw, 110px)', margin: 0 }}>Clure Theory Fest</h2>
+          <div className={styles.infoRow} style={{ marginTop: 0 }}>
+            <span>18<br className={styles.mobileBr} /> апреля</span>
+            <span>москва<span className={styles.serifComma}>,</span><br className={styles.mobileBr} /> <a href="https://t.me/npo_melody" target="_blank" rel="noopener noreferrer" className={styles.infoLink}>нпо мелодия</a></span>
+            <span>18+</span>
+          </div>
+          <button
+            id="buy-ticket-btn-home"
+            type="button"
+            className={styles.ticketBtn}
+            data-tc-event="69acc131c2a0a8102c515693"
+            data-tc-token="eyJhbGciOiJIUzI1NiIsImlzcyI6InRpY2tldHNjbG91ZC5ydSIsInR5cCI6IkpXVCJ9.eyJwIjoiNjlhNzI4NWI4YWQwMTllNzFlODljMjliIn0.7Oreh61Lt5J0lbo4pXAw37BV6uokCjEzuLQNCjcs7ZQ"
+          >
+            Купить билет
+          </button>
+        </div>
+      </section>
+
       <Footer />
+
+      <Script
+        src="https://ticketscloud.com/static/scripts/widget/tcwidget.js"
+        strategy="lazyOnload"
+      />
     </>
   )
 }

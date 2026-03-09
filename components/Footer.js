@@ -3,9 +3,12 @@ import styles from './Footer.module.css'
 
 const BG_URL = '/images/bg.png'
 
-export default function Footer({ overlayColor }) {
+export default function Footer({ overlayColor, shadowColor }) {
   return (
-    <footer className={styles.footer}>
+    <footer
+      className={styles.footer}
+      style={shadowColor ? { '--footer-shadow': shadowColor } : undefined}
+    >
       {/* Blurred background */}
       <div className={styles.bg} aria-hidden="true">
         <img src={BG_URL} alt="" className={styles.bgImg} />

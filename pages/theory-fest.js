@@ -4,13 +4,21 @@ import Navigation from '../components/Navigation'
 import Footer from '../components/Footer'
 import styles from '../components/TheoryFest.module.css'
 
+const NAV_LINKS = [
+  { href: '/', label: 'Главная' },
+  { href: '/articles', label: 'Статьи' },
+  { href: '/playlists', label: 'Плейлисты' },
+  { href: '/about', label: 'О нас' },
+]
 
 export default function TheoryFestPage() {
   return (
     <>
       <Head>
         <title>Clure Theory Fest — 1 year anniversary</title>
+        <meta name="theme-color" content="#1b40b0" />
         <style>{`
+          html, body { background: #1b40b0 !important; }
           #buy-ticket-btn {
             background: #1b40b0 !important;
             background-color: #1b40b0 !important;
@@ -32,7 +40,7 @@ export default function TheoryFestPage() {
       </Head>
 
       <div className={styles.page}>
-        <Navigation accentColor="rgba(27, 64, 176, 0.75)" />
+        <Navigation links={NAV_LINKS} accentColor="rgba(27, 64, 176, 0.75)" />
 
         <header className={styles.hero}>
           <h1 className={styles.title}>Clure Theory Fest</h1>
@@ -58,7 +66,7 @@ export default function TheoryFestPage() {
         </div>
       </div>
 
-      <Footer overlayColor="#1b40b0" />
+      <Footer overlayColor="#1b40b0" shadowColor="rgba(27, 64, 176, 0.5)" />
 
       <Script
         src="https://ticketscloud.com/static/scripts/widget/tcwidget.js"

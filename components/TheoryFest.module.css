@@ -134,6 +134,14 @@
   .mobileBr {
     display: block;
   }
+
+  .infoRow span:first-child {
+    text-align: center;
+  }
+
+  .infoRow span:last-child {
+    text-align: center;
+  }
 }
 
 .infoRow span:first-child {
