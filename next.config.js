@@ -2,6 +2,7 @@
 const nextConfig = {
   reactStrictMode: true,
   devIndicators: false,
+  trailingSlash: true,
   images: {
     domains: ['cdn.sanity.io'],
     unoptimized: true
