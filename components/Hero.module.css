@@ -72,3 +72,41 @@
   }
 }
 
+/* ─── Brand wrapper (positions badge relative to title) ─── */
+.brandWrap {
+  position: relative;
+  z-index: 1;
+  display: inline-block;
+}
+
+/* ─── Theory Fest corner badge ─── */
+.festBadge {
+  position: absolute;
+  bottom: 62%;
+  left: 65%;
+  margin-bottom: 0;
+  z-index: 2;
+  text-decoration: none;
+  display: block;
+  line-height: 0;
+  transform: rotate(20deg);
+}
+
+.festBadge:hover {
+  opacity: 0.85;
+}
+
+.festBadgeImg {
+  height: clamp(48px, 5.5vw, 90px);
+  width: auto;
+  display: block;
+  transform: rotate(5deg);
+  transform-origin: bottom left;
+}
+
+@media (max-width: 600px) {
+  .festBadgeImg {
+    height: 32px;
+  }
+}
+

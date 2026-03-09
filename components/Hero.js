@@ -55,22 +55,28 @@ export default function Hero({ title = 'Clure.', fontFamily, scrollTarget = 'art
       <div className={styles.bg} aria-hidden="true">
         <img src={BG_URL} alt="" className={styles.bgImg} />
       </div>
-      {/* Brand / Page title */}
-      <div
-        ref={brandRef}
-        className={brandClass}
-        aria-label={title}
-        onClick={handleClick}
-        role="button"
-        tabIndex={0}
-        onKeyDown={(e) => { if (e.key === 'Enter') handleClick() }}
-        style={{ cursor: 'pointer' }}
-      >
-        {fontFamily === 'sans' && title.endsWith('.') ? (
-          <>{title.slice(0, -1)}<span className={styles.brandDot}>.</span></>
-        ) : (
-          title
-        )}
+
+      {/* Theory Fest banner */}
+      <div className={styles.brandWrap}>
+        <div
+          ref={brandRef}
+          className={brandClass}
+          aria-label={title}
+          onClick={handleClick}
+          role="button"
+          tabIndex={0}
+          onKeyDown={(e) => { if (e.key === 'Enter') handleClick() }}
+          style={{ cursor: 'pointer' }}
+        >
+          {fontFamily === 'sans' && title.endsWith('.') ? (
+            <>{title.slice(0, -1)}<span className={styles.brandDot}>.</span></>
+          ) : (
+            title
+          )}
+        </div>
+        <a href="/theory-fest" className={styles.festBadge}>
+          <img src="/images/Banner.png" alt="Clure Theory Fest" className={styles.festBadgeImg} />
+        </a>
       </div>
     </section>
   )

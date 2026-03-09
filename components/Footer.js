@@ -3,13 +3,13 @@ import styles from './Footer.module.css'
 
 const BG_URL = '/images/bg.png'
 
-export default function Footer() {
+export default function Footer({ overlayColor }) {
   return (
     <footer className={styles.footer}>
       {/* Blurred background */}
       <div className={styles.bg} aria-hidden="true">
         <img src={BG_URL} alt="" className={styles.bgImg} />
-        <div className={styles.bgOverlay} />
+        <div className={styles.bgOverlay} style={overlayColor ? { background: overlayColor } : undefined} />
       </div>
 
       {/* Content */}
@@ -31,6 +31,7 @@ export default function Footer() {
             <span className={styles.label}>связь</span>
             <ul className={styles.list}>
               <li><a href="https://t.me/cluremag" target="_blank" rel="noopener noreferrer">Telegram</a></li>
+              <li><a href="mailto:cluremag@yandex.ru">cluremag@yandex.ru</a></li>
             </ul>
           </div>
         </div>

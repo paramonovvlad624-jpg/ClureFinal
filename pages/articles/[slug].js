@@ -1,11 +1,41 @@
 import Head from 'next/head'
 import Link from 'next/link'
+import { PortableText } from '@portabletext/react'
 import client from '../../lib/sanity'
 import urlFor from '../../lib/imageUrl'
 import slugify from '../../lib/slugify'
 import Navigation from '../../components/Navigation'
 import Footer from '../../components/Footer'
 import styles from '../../components/ArticlePage.module.css'
+
+const portableTextComponents = {
+  block: {
+    normal: ({ children }) => <p className={styles.rtParagraph}>{children}</p>,
+    h2: ({ children }) => <h2 className={styles.rtH2}>{children}</h2>,
+    h3: ({ children }) => <h3 className={styles.rtH3}>{children}</h3>,
+    blockquote: ({ children }) => <blockquote className={styles.rtBlockquote}>{children}</blockquote>,
+  },
+  marks: {
+    strong: ({ children }) => <strong>{children}</strong>,
+    em: ({ children }) => <em>{children}</em>,
+    link: ({ value, children }) => (
+      <a href={value?.href} target="_blank" rel="noopener noreferrer" className={styles.rtLink}>
+        {children}
+      </a>
+    ),
+  },
+  types: {
+    image: ({ value }) => {
+      const src = urlFor(value).width(1000).auto('format').url()
+      return (
+        <figure className={styles.rtFigure}>
+          <img src={src} alt={value.alt || ''} className={styles.rtImage} />
+          {value.caption && <figcaption className={styles.rtCaption}>{value.caption}</figcaption>}
+        </figure>
+      )
+    },
+  },
+}
 
 const ARTICLE_NAV = [
   { href: '/', label: 'Главная' },
@@ -60,10 +90,7 @@ export default function ArticlePage({ article, moreArticles = [] }) {
     ? urlFor(article.mainImage).width(1600).height(900).auto('format').url()
     : null
 
-  // Split plain-text body into paragraphs
-  const paragraphs = (article.body || '')
-    .split(/\n/)
-    .map((line, i) => <p key={i}>{line || '\u00A0'}</p>)
+
 
   return (
     <>
@@ -127,7 +154,9 @@ export default function ArticlePage({ article, moreArticles = [] }) {
           {/* ── Article body ── */}
           <article className={styles.articleSection}>
             <div className={styles.articleContent}>
-              <div className={styles.richText}>{paragraphs}</div>
+              <div className={styles.richText}>
+                {article.body && <PortableText value={article.body} components={portableTextComponents} />}
+              </div>
             </div>
           </article>
 

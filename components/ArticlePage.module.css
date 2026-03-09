@@ -189,9 +189,72 @@
   margin-top: 0;
 }
 
-.richText a {
+.richText a,
+.rtLink {
   color: #ffffff;
   text-decoration: underline;
+}
+
+/* Paragraphs */
+.rtParagraph {
+  margin: 0 0 1.2em;
+}
+
+.rtParagraph:last-child {
+  margin-bottom: 0;
+}
+
+/* Headings */
+.rtH2 {
+  font-family: 'Times New Roman', 'Georgia', serif;
+  font-weight: 400;
+  font-size: 40px;
+  line-height: 1.1;
+  letter-spacing: -1.2px;
+  color: #ffffff;
+  margin: 1.6em 0 0.5em;
+}
+
+.rtH3 {
+  font-family: 'Times New Roman', 'Georgia', serif;
+  font-weight: 400;
+  font-size: 28px;
+  line-height: 1.15;
+  letter-spacing: -0.6px;
+  color: #ffffff;
+  margin: 1.4em 0 0.4em;
+}
+
+/* Blockquote */
+.rtBlockquote {
+  border-left: 3px solid rgba(255, 255, 255, 0.5);
+  margin: 1.6em 0;
+  padding: 0.2em 0 0.2em 24px;
+  font-style: italic;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/* Body images */
+.rtFigure {
+  margin: 2em 0;
+  width: 100%;
+}
+
+.rtImage {
+  width: 100%;
+  height: auto;
+  border-radius: 6px;
+  display: block;
+}
+
+.rtCaption {
+  margin-top: 10px;
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.6);
+  text-align: center;
+  letter-spacing: -0.2px;
 }
 
 /* ─── "Больше статей" section ─── */

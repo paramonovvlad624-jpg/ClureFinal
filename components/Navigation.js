@@ -8,13 +8,16 @@ const DEFAULT_LINKS = [
   { href: '/about', label: 'О нас' },
 ]
 
-export default function Navigation({ links = DEFAULT_LINKS }) {
+export default function Navigation({ links = DEFAULT_LINKS, accentColor }) {
   const [open, setOpen] = useState(false)
+
+  const accentStyle = accentColor ? { background: accentColor } : undefined
 
   return (
     <nav className={styles.nav} aria-label="Main navigation">
       <button
         className={styles.toggle}
+        style={accentStyle}
         onClick={() => setOpen((v) => !v)}
         aria-expanded={open}
         aria-label="Toggle navigation"
@@ -30,6 +33,7 @@ export default function Navigation({ links = DEFAULT_LINKS }) {
             <Link
               href={link.href}
               className={styles.item}
+              style={accentStyle}
               onClick={() => setOpen(false)}
             >
               {link.label}

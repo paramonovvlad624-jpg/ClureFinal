@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@fontsource/geist-sans": "^5.2.5",
+    "@portabletext/react": "^6.0.3",
     "@sanity/client": "^5.0.0",
     "@sanity/image-url": "^1.0.0",
     "@vercel/analytics": "^1.6.1",
