@@ -215,9 +215,15 @@
   text-decoration: none;
   display: inline-block;
   transform: scaleY(1.6);
-  transform-origin: center center;
+  transform-origin: center bottom;
   /* filter: blur(0.75px); */
   text-shadow: none;
+}
+
+/* Stronger vertical stretch that grows upward only (bottom edge stays fixed) */
+.papinySlesyLong {
+  transform: scaleY(1.9);
+  transform-origin: center bottom;
 }
 
 @media (min-width: 601px) and (max-width: 900px) {

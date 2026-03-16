@@ -37,12 +37,12 @@ export default function TheoryFestPage() {
             <img src="/images/1-new.png" alt="" className={`${styles.tapePiece} ${styles.piece1}`} />
             <img src="/images/2.png" alt="" className={`${styles.tapePiece} ${styles.piece2}`} />
             <div className={`${styles.tapePiece} ${styles.piece3}`}> 
-              <a href="https://t.me/sudeall" target="_blank" rel="noopener noreferrer" className={styles.papinySlesy} style={{position: 'relative', top: '15px'}}>
+              <a href="https://t.me/sudeall" target="_blank" rel="noopener noreferrer" className={styles.papinySlesy}>
                 SUDEAL
               </a>
             </div>
             <div className={`${styles.tapePiece} ${styles.piece4}`}>
-              <a href="https://t.me/papinyslezyiworldwide" target="_blank" rel="noopener noreferrer" style={{fontFamily: 'Georgia, \'Times New Roman\', serif', fontWeight: 'bold', color: '#1b40b0', fontSize: '15cqi', lineHeight: 1, whiteSpace: 'nowrap', textAlign: 'center', letterSpacing: '-0.04em', textDecoration: 'none', display: 'inline-block', transform: 'scaleY(2.2)', transformOrigin: 'center center', textShadow: 'none'}}>
+              <a href="https://t.me/papinyslezyiworldwide" target="_blank" rel="noopener noreferrer" className={`${styles.papinySlesy} ${styles.papinySlesyLong}`}>
                 папины слёзы
               </a>
             </div>
