@@ -1,27 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://example.com/</loc>
+    <loc>https://clure.ru/</loc>
     <lastmod>2026-03-16</lastmod>
     <priority>1.00</priority>
   </url>
   <url>
-    <loc>https://example.com/about</loc>
+    <loc>https://clure.ru/about</loc>
     <lastmod>2026-03-16</lastmod>
     <priority>0.80</priority>
   </url>
   <url>
-    <loc>https://example.com/articles</loc>
+    <loc>https://clure.ru/articles</loc>
     <lastmod>2026-03-16</lastmod>
     <priority>0.80</priority>
   </url>
   <url>
-    <loc>https://example.com/playlists</loc>
+    <loc>https://clure.ru/playlists</loc>
     <lastmod>2026-03-16</lastmod>
     <priority>0.80</priority>
   </url>
   <url>
-    <loc>https://example.com/theory-fest</loc>
+    <loc>https://clure.ru/theory-fest</loc>
     <lastmod>2026-03-16</lastmod>
     <priority>0.80</priority>
   </url>

@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://clure.ru/sitemap.xml
+Host: clure.ru

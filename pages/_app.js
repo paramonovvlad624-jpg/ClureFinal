@@ -24,7 +24,7 @@ export default function App({ Component, pageProps }) {
               "@context": "https://schema.org",
               "@type": "WebSite",
               "name": "Clure",
-              "url": "https://example.com",
+              "url": "https://clure.ru",
               "potentialAction": {
                 "@type": "SearchAction",
                 "target": "https://example.com/search?q={search_term_string}",
@@ -38,27 +38,27 @@ export default function App({ Component, pageProps }) {
                 {
                   "@type": "SiteNavigationElement",
                   "name": "Home",
-                  "url": "https://example.com/"
+                  "url": "https://clure.ru/"
                 },
                 {
                   "@type": "SiteNavigationElement",
                   "name": "About",
-                  "url": "https://example.com/about"
+                  "url": "https://clure.ru/about"
                 },
                 {
                   "@type": "SiteNavigationElement",
                   "name": "Articles",
-                  "url": "https://example.com/articles"
+                  "url": "https://clure.ru/articles"
                 },
                 {
                   "@type": "SiteNavigationElement",
                   "name": "Playlists",
-                  "url": "https://example.com/playlists"
+                  "url": "https://clure.ru/playlists"
                 },
                 {
                   "@type": "SiteNavigationElement",
                   "name": "Theory Fest",
-                  "url": "https://example.com/theory-fest"
+                  "url": "https://clure.ru/theory-fest"
                 }
               ]
             })

@@ -83,11 +83,11 @@ export async function getStaticProps({ params }) {
   }
 
   return {
-    props: { article, moreArticles: moreArticles || [] },
+    props: { article, moreArticles: moreArticles || [], slug },
   }
 }
 
-export default function ArticlePage({ article, moreArticles = [] }) {
+export default function ArticlePage({ article, moreArticles = [], slug }) {
   const imageUrl = article.mainImage
     ? urlFor(article.mainImage).width(1600).height(900).auto('format').url()
     : null
@@ -98,6 +98,20 @@ export default function ArticlePage({ article, moreArticles = [] }) {
     <>
       <Head>
         <title>{article.title} — Clure</title>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "BreadcrumbList",
+              "itemListElement": [
+                { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://clure.ru/" },
+                { "@type": "ListItem", "position": 2, "name": "Articles", "item": "https://clure.ru/articles" },
+                { "@type": "ListItem", "position": 3, "name": article.title, "item": `https://clure.ru/articles/${slug}` }
+              ]
+            })
+          }}
+        />
       </Head>
       <Navigation links={ARTICLE_NAV} />
 
