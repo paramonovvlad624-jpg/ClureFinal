@@ -223,7 +223,7 @@
   display: inline-block;
   transform: scaleX(0.95) scaleY(1.6);
   transform-origin: center bottom;
-  filter: blur(0.5px);
+  filter: blur(0.6px);
   text-shadow: none;
 }
 
