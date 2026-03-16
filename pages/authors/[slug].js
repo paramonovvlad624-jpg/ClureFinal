@@ -70,7 +70,10 @@ export default function AuthorPage({ author, articles = [], playlistCount = 0, p
         <header style={{ padding: '120px 30px 40px', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 20, position: 'relative', overflow: 'hidden', color: 'var(--color-white)' }}>
           {/* Blurred background */}
           <div style={{ position: 'absolute', top: -60, left: -60, right: -60, bottom: -60, zIndex: 0, pointerEvents: 'none' }}>
-            <img src="/images/bg.png" alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center center', filter: 'blur(25px)', display: 'block' }} />
+            <picture>
+              <source srcSet={'/images/bg.webp'} type="image/webp" />
+              <img src="/images/bg.png" alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center center', filter: 'blur(25px)', display: 'block' }} />
+            </picture>
           </div>
           <div style={{
             display: 'flex',

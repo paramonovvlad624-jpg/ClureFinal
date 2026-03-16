@@ -34,8 +34,14 @@ export default function TheoryFestPage() {
             <span>18+</span>
           </div>
           <div className={styles.tape}>
-            <img src="/images/1-new.png" alt="" className={`${styles.tapePiece} ${styles.piece1}`} />
-            <img src="/images/2.png" alt="" className={`${styles.tapePiece} ${styles.piece2}`} />
+            <picture>
+              <source srcSet={'/images/1-new.webp'} type="image/webp" />
+              <img src="/images/1-new.png" alt="" className={`${styles.tapePiece} ${styles.piece1}`} />
+            </picture>
+            <picture>
+              <source srcSet={'/images/2.webp'} type="image/webp" />
+              <img src="/images/2.png" alt="" className={`${styles.tapePiece} ${styles.piece2}`} />
+            </picture>
             <div className={`${styles.tapePiece} ${styles.piece3}`}> 
               <a href="https://t.me/sudeall" target="_blank" rel="noopener noreferrer" className={styles.papinySlesy}>
                 SUDEAL
@@ -57,7 +63,10 @@ export default function TheoryFestPage() {
             data-tc-event="69acc131c2a0a8102c515693"
             data-tc-token="eyJhbGciOiJIUzI1NiIsImlzcyI6InRpY2tldHNjbG91ZC5ydSIsInR5cCI6IkpXVCJ9.eyJwIjoiNjlhNzI4NWI4YWQwMTllNzFlODljMjliIn0.7Oreh61Lt5J0lbo4pXAw37BV6uokCjEzuLQNCjcs7ZQ"
           >
-            <img src="/images/Buyticketlong.png" alt="Купить билет" className={styles.ticketBtnImg} />
+            <picture>
+              <source srcSet={'/images/Buyticketlong.webp'} type="image/webp" />
+              <img src="/images/Buyticketlong.png" alt="Купить билет" className={styles.ticketBtnImg} />
+            </picture>
           </button>
         </div>
       </div>

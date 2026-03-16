@@ -37,7 +37,10 @@ export default function Home({ page, articles = [] }) {
             data-tc-event="69acc131c2a0a8102c515693"
             data-tc-token="eyJhbGciOiJIUzI1NiIsImlzcyI6InRpY2tldHNjbG91ZC5ydSIsInR5cCI6IkpXVCJ9.eyJwIjoiNjlhNzI4NWI4YWQwMTllNzFlODljMjliIn0.7Oreh61Lt5J0lbo4pXAw37BV6uokCjEzuLQNCjcs7ZQ"
           >
-            <img src="/images/Buyticketlong.png" alt="Купить билет" className={styles.ticketBtnImg} />
+            <picture>
+              <source srcSet={'/images/Buyticketlong.webp'} type="image/webp" />
+              <img src="/images/Buyticketlong.png" alt="Купить билет" className={styles.ticketBtnImg} />
+            </picture>
           </button>
         </div>
       </section>

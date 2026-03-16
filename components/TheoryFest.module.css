@@ -6,7 +6,7 @@
 .page {
   position: relative;
   min-height: 100vh;
-  background-image: url('/images/theory-fest-bg.png');
+  background-image: url('/images/theory-fest-bg.webp');
 
   /* Scale so the image fills viewport width; white top zone stays proportional */
   background-size: cover;

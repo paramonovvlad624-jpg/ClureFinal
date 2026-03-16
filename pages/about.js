@@ -28,7 +28,10 @@ export default function AboutPage({ authors = [] }) {
 
       <div id="about-content" className={s.wrapper}>
         <div className={s.bg} aria-hidden="true">
-          <img src={BG_URL} alt="" className={s.bgImg} />
+          <picture>
+            <source srcSet={BG_URL.replace(/\.png$/i, '.webp')} type="image/webp" />
+            <img src={BG_URL} alt="" className={s.bgImg} />
+          </picture>
         </div>
         <div className={s.content}>
           <p className={s.lead}>

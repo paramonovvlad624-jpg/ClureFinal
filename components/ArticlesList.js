@@ -5,7 +5,10 @@ import ArticleCard from './ArticleCard'
 function FillerCell({ src, alt = '', className }) {
   return (
     <div className={`${styles.filler} ${className || ''}`}>
-      <img src={src} alt={alt} className={styles.fillerImg} />
+      <picture>
+        <source srcSet={src.replace(/\.png$/i, '.webp')} type="image/webp" />
+        <img src={src} alt={alt} className={styles.fillerImg} />
+      </picture>
     </div>
   )
 }

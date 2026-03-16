@@ -11,7 +11,10 @@ export default function Footer({ overlayColor, shadowColor }) {
     >
       {/* Blurred background */}
       <div className={styles.bg} aria-hidden="true">
-        <img src={BG_URL} alt="" className={styles.bgImg} />
+        <picture>
+          <source srcSet={BG_URL.replace(/\.png$/i, '.webp')} type="image/webp" />
+          <img src={BG_URL} alt="" className={styles.bgImg} />
+        </picture>
         <div className={styles.bgOverlay} style={overlayColor ? { background: overlayColor } : undefined} />
       </div>
 
