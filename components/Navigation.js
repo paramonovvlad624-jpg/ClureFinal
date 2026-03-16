@@ -12,13 +12,14 @@ const DEFAULT_LINKS = [
 export default function Navigation({ links = DEFAULT_LINKS, accentColor }) {
   const [open, setOpen] = useState(false)
 
-  const accentStyle = accentColor ? { background: accentColor } : undefined
+  // expose accent color + hover-bg as CSS variables (do not set `background` inline)
+  const accentStyleWithVar = accentColor ? { '--nav-accent': accentColor, '--nav-hover-bg': '#ffffff' } : undefined
 
   return (
     <nav className={styles.nav} aria-label="Main navigation">
       <button
         className={styles.toggle}
-        style={accentStyle}
+      style={accentStyleWithVar}
         onClick={() => setOpen((v) => !v)}
         aria-expanded={open}
         aria-label="Toggle navigation"
@@ -31,12 +32,12 @@ export default function Navigation({ links = DEFAULT_LINKS, accentColor }) {
       <ul className={`${styles.list} ${open ? styles.listOpen : ''}`}>
         {links.map((link) => (
           <li key={link.href}>
-            <Link
-              href={link.href}
-              className={styles.item}
-              style={accentStyle}
-              onClick={() => setOpen(false)}
-            >
+          <Link
+            href={link.href}
+            className={styles.item}
+            style={accentStyleWithVar}
+            onClick={() => setOpen(false)}
+          >
               {link.label}
             </Link>
           </li>

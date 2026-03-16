@@ -15,7 +15,7 @@
   width: 40px;
   height: 40px;
   padding: 8px;
-  background: rgba(142, 180, 199, 0.75);
+  background: var(--nav-accent, rgba(142, 180, 199, 0.75));
   border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 12px;
   cursor: pointer;
@@ -26,7 +26,13 @@
 }
 
 .toggle:hover {
-  background: rgba(246, 248, 251, 0.9);
+  background: var(--nav-hover-bg, rgba(246, 248, 251, 0.9));
+}
+
+/* When the toggle background goes light, draw the bars in the current accent color */
+.toggle:hover .bar,
+.toggle:hover .barOpen {
+  background: var(--nav-accent, #7fbacd);
 }
 
 .bar,
@@ -78,7 +84,7 @@
   gap: 12px;
   padding: 18px 20px;
   width: 100%;
-  background: rgba(142, 180, 199, 0.75);
+  background: var(--nav-accent, rgba(142, 180, 199, 0.75));
   border: 1px solid rgba(255, 255, 255, 0.2);
   color: #ffffff;
   text-decoration: none;
@@ -99,8 +105,8 @@
 }
 
 .item:hover {
-  background: rgba(246, 248, 251, 0.9);
-  color: #7fbacd;
+  background: var(--nav-hover-bg, rgba(246, 248, 251, 0.9));
+  color: var(--nav-accent, #7fbacd);
   transform: translateX(4px);
 }
 
