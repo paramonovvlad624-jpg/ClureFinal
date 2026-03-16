@@ -56,7 +56,7 @@ export default function Hero({ title = 'Clure.', fontFamily, scrollTarget = 'art
       <div className={styles.bg} aria-hidden="true">
         <picture>
           <source srcSet={BG_URL.replace(/\.png$/i, '.webp')} type="image/webp" />
-          <img src={BG_URL} alt="" className={styles.bgImg} />
+          <img src={BG_URL} alt="" className={styles.bgImg} width="1920" height="1080" />
         </picture>
       </div>
 
@@ -81,7 +81,7 @@ export default function Hero({ title = 'Clure.', fontFamily, scrollTarget = 'art
         <Link href="/theory-fest" className={`${styles.festBadge}${shortTitle ? ' ' + styles.festBadgeShortTitle : ''}`} style={badgeLeft ? { left: badgeLeft } : undefined}>
           <picture>
             <source srcSet={'/images/Banner.webp'} type="image/webp" />
-            <img src="/images/Banner.png" alt="Clure Theory Fest" className={styles.festBadgeImg} />
+            <img src="/images/Banner.png" alt="Clure Theory Fest" className={styles.festBadgeImg} width="480" height="160" />
           </picture>
         </Link>
       </div>

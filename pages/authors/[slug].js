@@ -72,7 +72,7 @@ export default function AuthorPage({ author, articles = [], playlistCount = 0, p
           <div style={{ position: 'absolute', top: -60, left: -60, right: -60, bottom: -60, zIndex: 0, pointerEvents: 'none' }}>
             <picture>
               <source srcSet={'/images/bg.webp'} type="image/webp" />
-              <img src="/images/bg.png" alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center center', filter: 'blur(25px)', display: 'block' }} />
+              <img src="/images/bg.png" alt="" width="1600" height="900" style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center center', filter: 'blur(25px)', display: 'block' }} />
             </picture>
           </div>
           <div style={{

@@ -13,7 +13,7 @@ export default function Footer({ overlayColor, shadowColor }) {
       <div className={styles.bg} aria-hidden="true">
         <picture>
           <source srcSet={BG_URL.replace(/\.png$/i, '.webp')} type="image/webp" />
-          <img src={BG_URL} alt="" className={styles.bgImg} />
+          <img src={BG_URL} alt="" className={styles.bgImg} width="1600" height="900" />
         </picture>
         <div className={styles.bgOverlay} style={overlayColor ? { background: overlayColor } : undefined} />
       </div>

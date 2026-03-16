@@ -10,6 +10,9 @@ export default function App({ Component, pageProps }) {
   return (
     <>
       <Head>
+        {/* Preload hero and banner images to improve LCP */}
+        <link rel="preload" as="image" href="/images/bg.webp" type="image/webp" />
+        <link rel="preload" as="image" href="/images/Banner.webp" type="image/webp" />
         <link rel="icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" href="/images/favicon-16/favicon-96x96.png" sizes="96x96" />
         <link rel="icon" type="image/svg+xml" href="/images/favicon-16/favicon.svg" />
