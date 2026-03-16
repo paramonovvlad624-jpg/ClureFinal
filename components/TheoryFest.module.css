@@ -213,7 +213,7 @@
 .papinySlesy {
   font-family: Georgia, 'Times New Roman', serif;
   font-weight: bold;
-  color: #1b40b0;
+  color: #0f2a66;
   font-size: 15cqi;
   line-height: 1;
   white-space: nowrap;
@@ -221,7 +221,7 @@
   letter-spacing: -0.04em;
   text-decoration: none;
   display: inline-block;
-  transform: scaleY(1.6);
+  transform: scaleX(0.95) scaleY(1.6);
   transform-origin: center bottom;
   filter: blur(0.5px);
   text-shadow: none;
@@ -229,7 +229,7 @@
 
 /* Stronger vertical stretch that grows upward only (bottom edge stays fixed) */
 .papinySlesyLong {
-  transform: scaleY(1.9);
+  transform: scaleX(0.95) scaleY(1.9);
   transform-origin: center bottom;
 }
 
