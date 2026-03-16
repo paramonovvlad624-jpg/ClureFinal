@@ -17,6 +17,8 @@ export default function TheoryFestPage() {
       <Head>
         <title>Clure Theory Fest — 1 year anniversary</title>
         <meta name="theme-color" content="#1b40b0" />
+        {/* Preload the hero background as an image to improve LCP discovery */}
+        <link rel="preload" as="image" href="/images/theory-fest-bg.webp" type="image/webp" />
         <style>{`
           html, body { background: #1b40b0 !important; }
         `}</style>
@@ -26,6 +28,17 @@ export default function TheoryFestPage() {
         <Navigation links={NAV_LINKS} accentColor="rgba(27, 64, 176, 0.75)" />
 
         <header className={styles.hero}>
+          {/* LCP image injected as an actual <img> so browsers prioritize it reliably */}
+          <img
+            src="/images/theory-fest-bg.webp"
+            alt=""
+            aria-hidden="true"
+            className={styles.heroBgImg}
+            width="1920"
+            height="1080"
+            loading="eager"
+            fetchpriority="high"
+          />
           <h1 className={styles.title}>Clure Theory Fest</h1>
           <p className={styles.subtitle}>1 year anniversary</p>
           <div className={styles.infoRow}>
@@ -73,9 +86,33 @@ export default function TheoryFestPage() {
 
       <Footer overlayColor="#1b40b0" shadowColor="rgba(27, 64, 176, 0.5)" />
 
-      <Script
-        src="https://ticketscloud.com/static/scripts/widget/tcwidget.js"
-        strategy="lazyOnload"
+      {/* Defer loading of the tickets widget until user interaction or idle time to reduce TBT */}
+      <script
+        dangerouslySetInnerHTML={{ __html: `
+          (function(){
+            function loadTickets(){
+              if (window.__tc_widget_loaded) return;
+              window.__tc_widget_loaded = true;
+              var s = document.createElement('script');
+              s.src = 'https://ticketscloud.com/static/scripts/widget/tcwidget.js';
+              s.async = true;
+              document.body.appendChild(s);
+            }
+            // Load on user interaction with buy button
+            var btn = document.getElementById('buy-ticket-btn');
+            if (btn) {
+              btn.addEventListener('mouseenter', loadTickets, { once: true, passive: true });
+              btn.addEventListener('focus', loadTickets, { once: true, passive: true });
+              btn.addEventListener('touchstart', loadTickets, { once: true, passive: true });
+            }
+            // Fallback: load during idle after 3s
+            if ('requestIdleCallback' in window) {
+              requestIdleCallback(loadTickets, { timeout: 3000 });
+            } else {
+              setTimeout(loadTickets, 3000);
+            }
+          })();
+        ` }}
       />
     </>
   )

@@ -47,9 +47,20 @@ export default function Home({ page, articles = [] }) {
 
       <Footer />
 
-      <Script
-        src="https://ticketscloud.com/static/scripts/widget/tcwidget.js"
-        strategy="lazyOnload"
+      {/* Load tickets widget only on user interaction or idle to avoid blocking the main thread */}
+      <script
+        dangerouslySetInnerHTML={{ __html: `
+          (function(){
+            if ('requestIdleCallback' in window) {
+              requestIdleCallback(function(){
+                var s = document.createElement('script');
+                s.src = 'https://ticketscloud.com/static/scripts/widget/tcwidget.js';
+                s.async = true;
+                document.body.appendChild(s);
+              }, {timeout:3000});
+            }
+          })();
+        ` }}
       />
     </>
   )

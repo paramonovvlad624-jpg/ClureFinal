@@ -3,7 +3,8 @@ import '@fontsource/geist-sans/400.css'
 import '@fontsource/geist-sans/500.css'
 import '@fontsource/geist-sans/600.css'
 import '@fontsource/geist-sans/900.css'
-import { Analytics } from '@vercel/analytics/next'
+import dynamic from 'next/dynamic'
+const Analytics = dynamic(() => import('@vercel/analytics/next').then((mod) => mod.Analytics || mod), { ssr: false })
 import Head from 'next/head'
 
 export default function App({ Component, pageProps }) {
