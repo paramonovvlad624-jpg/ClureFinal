@@ -105,7 +105,7 @@
   color: #1b40b0;
   margin-top: 3em;
   padding: 0 24px;
-  filter: blur(0.35px);
+  /* filter: blur(0.35px); */
   text-shadow:
     0 0 6px rgba(255, 255, 255, 1),
     0 0 12px rgba(255, 255, 255, 1),
@@ -204,7 +204,7 @@
 }
 
 .papinySlesy {
-   font-family: Georgia, 'Times New Roman', serif;
+  font-family: Georgia, 'Times New Roman', serif;
   font-weight: bold;
   color: #1b40b0;
   font-size: 15cqi;
@@ -214,9 +214,9 @@
   letter-spacing: -0.04em;
   text-decoration: none;
   display: inline-block;
-  transform: scaleY(1.27);
+  transform: scaleY(1.6);
   transform-origin: center center;
-  filter: blur(0.75px);
+  /* filter: blur(0.75px); */
   text-shadow: none;
 }
 
