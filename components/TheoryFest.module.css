@@ -203,6 +203,13 @@
   transform: translateY(60%);
 }
 
+/* Nudge the anchor labels slightly lower so they align visually */
+.piece3 a,
+.piece4 a {
+  position: relative;
+  top: 18px;
+}
+
 .papinySlesy {
   font-family: Georgia, 'Times New Roman', serif;
   font-weight: bold;
@@ -216,7 +223,7 @@
   display: inline-block;
   transform: scaleY(1.6);
   transform-origin: center bottom;
-  /* filter: blur(0.75px); */
+  filter: blur(0.5px);
   text-shadow: none;
 }
 
