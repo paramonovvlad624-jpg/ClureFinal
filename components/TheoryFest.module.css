@@ -190,11 +190,33 @@
 }
 
 .tapePiece:active {
-  filter: brightness(1.35) saturate(0.8);
+  /* disable parent active visual — we'll handle per-element blink via JS/CSS */
+  filter: none;
+}
+
+/* Blink animations for single-element feedback */
+@keyframes blinkWhite {
+  0% { filter: none; }
+  30% { filter: brightness(2) saturate(0.2); }
+  100% { filter: none; }
+}
+
+.blink-white {
+  animation: blinkWhite 260ms ease;
+}
+
+@keyframes blinkText {
+  0% { color: inherit; text-shadow: none; }
+  30% { color: #ffffff; text-shadow: 0 0 10px rgba(255,255,255,0.95); }
+  100% { color: inherit; text-shadow: none; }
+}
+
+.blink-white-text {
+  animation: blinkText 260ms ease;
 }
 
 .piece1 { left: 12.06%; top: 3.52%;  width: 74.23%; }
-.piece2 { left: 3.27%;  top: calc(25.91% + 30px); width: 91.94%; }
+.piece2 { left: 3.27%;  top: calc(34% + 30px); width: 91.94%; }
 .piece3 {
   left: 1.53%;
   top: calc(50.53% + 60px);
@@ -216,11 +238,104 @@
   transform: translateY(60%);
 }
 
+/* Copies container used inside .piece2 so copied anchors get same container inline-size
+   and therefore identical `cqi`-based sizing as the originals in .piece3/.piece4 */
+.piece2CopyRow {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.piece2Copy {
+  width: 45.93%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  container-type: inline-size;
+}
+
+/* Nudge the right-side copy (Гипнобаза) slightly to the right for visual balance */
+.piece2Copy:last-child a {
+  position: relative;
+  left: 18px;
+}
+
+@media (max-width: 600px) {
+  .piece2Copy:last-child a {
+    left: 12px;
+  }
+}
+
+/* Size the inserted picture inside the piece2 copy containers */
+.piece2Copy picture,
+.piece2Copy img {
+  /* slightly smaller than before to fit visually */
+  max-width: 95%;
+  height: auto;
+  display: block;
+  object-fit: contain;
+  transition: transform 140ms ease;
+}
+
+/* Nudge the left (first) copy image slightly upward to align with nearby labels */
+.piece2Copy:first-child picture,
+.piece2Copy:first-child img {
+  position: relative;
+  top: -14px;
+  transform: scale(1.06);
+  transform-origin: center bottom;
+}
+
+@media (max-width: 600px) {
+  .piece2Copy:first-child picture,
+  .piece2Copy:first-child img {
+    top: -6px;
+    transform: scale(1.04);
+  }
+}
+
+/* Slightly enlarge the copied 'гипнобаза' label only */
+.gipnoBigger {
+  font-size: 17cqi;
+  transform: scaleX(0.95) scaleY(1.85);
+  transform-origin: center bottom;
+}
+
+@media (max-width: 600px) {
+  .gipnoBigger {
+    font-size: 20px;
+    transform: scaleX(0.95) scaleY(1.45);
+  }
+}
+
 /* Nudge the anchor labels slightly lower so they align visually */
 .piece3 a,
 .piece4 a {
   position: relative;
-  top: 18px;
+  top: 40px;
+  /* Slightly reduce size of the original anchors without changing their other styles */
+  font-size: calc(15cqi * 0.85);
+}
+
+@media (max-width: 600px) {
+  .piece3 a,
+  .piece4 a {
+    top: 20px;
+    font-size: calc(15cqi * 0.82);
+  }
+}
+
+/* Move only the right-side label (папины слёзы) slightly upward without affecting SUDEAL */
+.piece4 a {
+  top: 34px;
+}
+
+@media (max-width: 600px) {
+  .piece4 a {
+    top: 16px;
+  }
 }
 
 .papinySlesy {
@@ -234,7 +349,7 @@
   letter-spacing: -0.04em;
   text-decoration: none;
   display: inline-block;
-  transform: scaleX(0.95) scaleY(1.6);
+  transform: translateY(-3px) scaleX(0.95) scaleY(1.75);
   transform-origin: center bottom;
   filter: blur(0.6px);
   text-shadow: none;
@@ -244,6 +359,46 @@
 .papinySlesyLong {
   transform: scaleX(0.95) scaleY(1.9);
   transform-origin: center bottom;
+}
+
+/* Ensure the copied label with both classes becomes larger than the original */
+.papinySlesy.gipnoBigger {
+  /* Use container-query units so scaling matches the original .papinySlesy */
+  font-size: calc(15cqi * 1.15);
+  transform: translateY(-3px) scaleX(0.95) scaleY(1.9);
+  transform-origin: center bottom;
+}
+
+@media (max-width: 600px) {
+  .papinySlesy.gipnoBigger {
+    font-size: calc(15cqi * 1.05);
+    transform: translateY(-3px) scaleX(0.95) scaleY(1.6);
+  }
+}
+
+/* Row container for the two "гипнобаза" labels that replace the tape image */
+.gipnoRow {
+  display: flex;
+  gap: 0.6rem;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.gipno {
+  /* Slightly larger than .papinySlesy (tuned up) */
+  font-size: clamp(32px, 5.2vw, 60px);
+  transform: scaleX(0.99) scaleY(2.2);
+  transform-origin: center bottom;
+  filter: blur(0.35px);
+  padding: 0 6px;
+}
+
+@media (max-width: 600px) {
+  .gipno {
+    font-size: clamp(18px, 7vw, 34px);
+    transform: scaleX(0.99) scaleY(1.8);
+  }
 }
 
 @media (min-width: 601px) and (max-width: 900px) {

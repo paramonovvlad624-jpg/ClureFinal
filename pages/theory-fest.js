@@ -49,12 +49,23 @@ export default function TheoryFestPage() {
           <div className={styles.tape}>
             <picture>
               <source srcSet={'/images/1-new.webp'} type="image/webp" />
-              <img src="/images/1-new.png" alt="" className={`${styles.tapePiece} ${styles.piece1}`} />
+              <img data-piece="piece1" src="/images/1-new.png" alt="" className={`${styles.tapePiece} ${styles.piece1}`} />
             </picture>
-            <picture>
-              <source srcSet={'/images/2.webp'} type="image/webp" />
-              <img src="/images/2.png" alt="" className={`${styles.tapePiece} ${styles.piece2}`} />
-            </picture>
+            <div className={`${styles.tapePiece} ${styles.piece2}`}>
+              <div className={styles.piece2CopyRow}>
+                <div className={styles.piece2Copy}>
+                  <picture>
+                    <source srcSet={'/images/3.webp'} type="image/webp" />
+                    <img data-piece="piece3copy" src="/images/3.png" alt="папины слёзы" />
+                  </picture>
+                </div>
+                <div className={styles.piece2Copy}>
+                  <a href="https://t.me/hypnobaza" target="_blank" rel="noopener noreferrer" className={`${styles.papinySlesy} ${styles.gipnoBigger}`}>
+                    Гипнобаза
+                  </a>
+                </div>
+              </div>
+            </div>
             <div className={`${styles.tapePiece} ${styles.piece3}`}> 
               <a href="https://t.me/sudeall" target="_blank" rel="noopener noreferrer" className={styles.papinySlesy}>
                 SUDEAL
@@ -85,6 +96,28 @@ export default function TheoryFestPage() {
       </div>
 
       <Footer overlayColor="#1b40b0" shadowColor="rgba(27, 64, 176, 0.5)" />
+
+      {/* Script: copy height of the top tape image to the /images/3.png copy so they match visually */}
+      <script
+        dangerouslySetInnerHTML={{ __html: `
+          (function(){
+            function syncHeight(){
+              try{
+                var src = document.querySelector('[data-piece="piece1"]');
+                var target = document.querySelector('[data-piece="piece3copy"]');
+                if (!src || !target) return;
+                var h = src.getBoundingClientRect().height;
+                target.style.height = Math.round(h) + 'px';
+                target.style.width = 'auto';
+              }catch(e){/* ignore */}
+            }
+            if (typeof window !== 'undefined'){
+              window.addEventListener('load', function(){ syncHeight(); setTimeout(syncHeight, 300); });
+              window.addEventListener('resize', function(){ syncHeight(); });
+            }
+          })();
+        ` }}
+      />
 
       {/* Defer loading of the tickets widget until user interaction or idle time to reduce TBT */}
       <script
