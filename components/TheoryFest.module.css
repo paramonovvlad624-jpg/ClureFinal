@@ -238,6 +238,24 @@
   transform: translateY(60%);
 }
 
+/* Desktop-only: add a little vertical spacing between tape groups
+   Group 1: .piece1 (top tape)
+   Group 2: .piece2 (3.png + Гипнобаза)
+   Group 3: .piece3/.piece4 (SUDEAL + папины слёзы)
+*/
+@media (min-width: 901px) {
+  .piece2 {
+    /* push group 2 slightly lower */
+    top: calc(34% + 60px);
+  }
+
+  .piece3,
+  .piece4 {
+    /* push group 3 further lower to increase spacing */
+    top: calc(50.53% + 100px);
+  }
+}
+
 /* Copies container used inside .piece2 so copied anchors get same container inline-size
    and therefore identical `cqi`-based sizing as the originals in .piece3/.piece4 */
 .piece2CopyRow {
@@ -265,6 +283,13 @@
 @media (max-width: 600px) {
   .piece2Copy:last-child a {
     left: 12px;
+  }
+}
+
+@media (min-width: 901px) {
+  /* Desktop: nudge Гипнобаза further right for spacing */
+  .piece2Copy:last-child a {
+    left: 40px;
   }
 }
 
