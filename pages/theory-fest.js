@@ -54,13 +54,12 @@ export default function TheoryFestPage() {
             <div className={`${styles.tapePiece} ${styles.piece2}`}>
               <div className={styles.piece2CopyRow}>
                 <div className={styles.piece2Copy}>
-                  <picture>
-                    <source srcSet={'/images/3.webp'} type="image/webp" />
-                    <img data-piece="piece3copy" src="/images/3.png" alt="папины слёзы" />
-                  </picture>
+                  <a href="https://t.me/blagennim" target="_blank" rel="noopener noreferrer" className={`${styles.papinySlesy} ${styles.papinySlesyLong}`}>
+                    жизнь блаженным
+                  </a>
                 </div>
                 <div className={styles.piece2Copy}>
-                  <a href="https://t.me/hypnobaza" target="_blank" rel="noopener noreferrer" className={`${styles.papinySlesy} ${styles.gipnoBigger}`}>
+                  <a href="https://t.me/hypnobaza" target="_blank" rel="noopener noreferrer" className={`${styles.papinySlesy} ${styles.papinySlesyLong}`}>
                     Гипнобаза
                   </a>
                 </div>

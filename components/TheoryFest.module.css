@@ -260,10 +260,16 @@
    and therefore identical `cqi`-based sizing as the originals in .piece3/.piece4 */
 .piece2CopyRow {
   display: flex;
-  gap: 0.5rem;
+  gap: 2rem; /* increased gap between the two copied labels */
   align-items: center;
   justify-content: center;
   height: 100%;
+}
+
+@media (max-width: 600px) {
+  .piece2CopyRow {
+    gap: 1rem; /* slightly smaller gap on narrow screens */
+  }
 }
 
 .piece2Copy {
@@ -321,23 +327,24 @@
   }
 }
 
-/* Slightly enlarge the copied 'гипнобаза' label only */
+/* Slightly enlarge the copied 'гипнобаза' label only (reduced) */
 .gipnoBigger {
-  font-size: 17cqi;
-  transform: scaleX(0.95) scaleY(1.85);
+  font-size: 13cqi;
+  transform: scaleX(0.95) scaleY(1.6);
   transform-origin: center bottom;
 }
 
 @media (max-width: 600px) {
   .gipnoBigger {
     font-size: 20px;
-    transform: scaleX(0.95) scaleY(1.45);
+    transform: scaleX(0.95) scaleY(1.5);
   }
 }
 
 /* Nudge the anchor labels slightly lower so they align visually */
 .piece3 a,
-.piece4 a {
+.piece4 a,
+.piece2Copy .papinySlesy {
   position: relative;
   top: 40px;
   /* Slightly reduce size of the original anchors without changing their other styles */
@@ -346,9 +353,47 @@
 
 @media (max-width: 600px) {
   .piece3 a,
-  .piece4 a {
+  .piece4 a,
+  .piece2Copy .papinySlesy {
     top: 20px;
     font-size: calc(15cqi * 0.82);
+  }
+}
+
+/* Ensure the copied labels inside .piece2Copy match the originals in .piece3/.piece4 */
+.piece2Copy .papinySlesy {
+  /* match exact sizing and vertical stretch used by the originals (.piece3/.piece4) */
+  font-family: Georgia, 'Times New Roman', serif;
+  font-weight: bold;
+  color: #0f2a66;
+  font-size: calc(15cqi * 0.85);
+  line-height: 1;
+  white-space: nowrap;
+  text-align: center;
+  letter-spacing: -0.04em;
+  text-decoration: none;
+  display: inline-block;
+  transform: translateY(-3px) scaleX(0.95) scaleY(1.9);
+  transform-origin: center bottom;
+  filter: blur(0.6px);
+}
+
+@media (max-width: 600px) {
+  .piece2Copy .papinySlesy {
+    /* increase explicit mobile size to match папины слёзы */
+    font-size: 19px;
+    transform: translateY(-3px) scaleX(0.95) scaleY(1.6);
+    transform-origin: center bottom;
+    filter: blur(0.6px);
+  }
+}
+
+/* Ensure the stronger vertical distortion for the 'Long' variant remains on mobile */
+@media (max-width: 600px) {
+  .piece2Copy .papinySlesy.papinySlesyLong {
+    transform: translateY(-3px) scaleX(0.95) scaleY(1.9);
+    transform-origin: center bottom;
+    filter: blur(0.6px);
   }
 }
 
@@ -367,14 +412,14 @@
   font-family: Georgia, 'Times New Roman', serif;
   font-weight: bold;
   color: #0f2a66;
-  font-size: 15cqi;
+  font-size: 12cqi;
   line-height: 1;
   white-space: nowrap;
   text-align: center;
   letter-spacing: -0.04em;
   text-decoration: none;
   display: inline-block;
-  transform: translateY(-3px) scaleX(0.95) scaleY(1.75);
+  transform: translateY(-3px) scaleX(0.95) scaleY(1.4);
   transform-origin: center bottom;
   filter: blur(0.6px);
   text-shadow: none;
@@ -388,15 +433,15 @@
 
 /* Ensure the copied label with both classes becomes larger than the original */
 .papinySlesy.gipnoBigger {
-  /* Use container-query units so scaling matches the original .papinySlesy */
-  font-size: calc(15cqi * 1.15);
-  transform: translateY(-3px) scaleX(0.95) scaleY(1.9);
+  /* Slightly larger than the base, but reduced for visual balance */
+  font-size: calc(12cqi * 1.05);
+  transform: translateY(-3px) scaleX(0.95) scaleY(1.6);
   transform-origin: center bottom;
 }
 
-@media (max-width: 600px) {
+  @media (max-width: 600px) {
   .papinySlesy.gipnoBigger {
-    font-size: calc(15cqi * 1.05);
+    font-size: calc(12cqi * 1.15);
     transform: translateY(-3px) scaleX(0.95) scaleY(1.6);
   }
 }
@@ -430,6 +475,10 @@
   .tape {
     max-width: 480px;
     margin-top: 6em;
+  }
+  /* Tablet: move SUDEAL (left label) up 4px */
+  .piece3 a {
+    top: 36px; /* was 40px on desktop */
   }
 }
 
@@ -500,6 +549,13 @@
 @media (max-width: 600px) {
   .ticketBtn {
     max-width: 100%;
+  }
+}
+
+/* Mobile: nudge SUDEAL (left label .piece3 a) 4px higher to match desired spacing */
+@media (max-width: 600px) {
+  .piece3 a {
+    top: 17px; /* adjusted per request */
   }
 }
 
