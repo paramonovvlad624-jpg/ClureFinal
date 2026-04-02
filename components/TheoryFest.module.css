@@ -215,27 +215,62 @@
   animation: blinkText 260ms ease;
 }
 
-.piece1 { left: 12.06%; top: 3.52%;  width: 74.23%; }
-.piece2 { left: 3.27%;  top: calc(34% + 30px); width: 91.94%; }
-.piece3 {
-  left: 1.53%;
-  top: calc(50.53% + 60px);
-  width: 45.93%;
+.piece1 { left: 12.06%; top: 0%;  width: 74.23%; }
+
+/* VOSMOY text replacing image — гипнобаза style */
+.vosmoy {
   display: flex;
   align-items: center;
   justify-content: center;
   container-type: inline-size;
-  transform: translateY(60%);
+  aspect-ratio: 1836 / 590;
+}
+
+.vosmoyLink {
+  font-family: Georgia, 'Times New Roman', serif;
+  font-weight: bold;
+  color: #0f2a66;
+  font-size: 7.8cqi;
+  line-height: 1;
+  white-space: nowrap;
+  text-align: center;
+  letter-spacing: -0.04em;
+  text-decoration: none;
+  display: inline-block;
+  transform: scaleX(0.95) scaleY(1.9);
+  transform-origin: center center;
+  filter: blur(0.5px);
+  text-shadow: none;
+  transition: filter 80ms ease;
+}
+
+
+@media (max-width: 600px) {
+  .vosmoyLink {
+    font-size: 7.2cqi;
+    transform: scaleX(0.95) scaleY(1.7);
+  }
+}
+.piece2 { left: 3.27%;  top: 36%; width: 91.94%; }
+.piece3 {
+  left: 1.57%;
+  top: 62%;
+  width: 45.93%;
+  height: 18%;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  container-type: inline-size;
 }
 .piece4 {
   left: 52.5%;
-  top: calc(50.53% + 60px);
+  top: 62%;
   width: 45.93%;
+  height: 18%;
   container-type: inline-size;
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   justify-content: center;
-  transform: translateY(60%);
 }
 
 /* Desktop-only: add a little vertical spacing between tape groups
@@ -245,14 +280,12 @@
 */
 @media (min-width: 901px) {
   .piece2 {
-    /* push group 2 slightly lower */
-    top: calc(34% + 60px);
+    top: 38%;
   }
 
   .piece3,
   .piece4 {
-    /* push group 3 further lower to increase spacing */
-    top: calc(50.53% + 100px);
+    top: 62%;
   }
 }
 
@@ -343,17 +376,29 @@
 
 /* Nudge the anchor labels slightly lower so they align visually */
 .piece3 a,
-.piece4 a,
+.piece4 a {
+  position: relative;
+  top: 0;
+  font-size: calc(15cqi * 0.8);
+}
+
 .piece2Copy .papinySlesy {
   position: relative;
   top: 40px;
-  /* Slightly reduce size of the original anchors without changing their other styles */
   font-size: calc(15cqi * 0.85);
+}
+
+/* SUDEAL: slightly smaller font */
+.piece3 a {
+  font-size: calc(15cqi * 0.68);
 }
 
 @media (max-width: 600px) {
   .piece3 a,
-  .piece4 a,
+  .piece4 a {
+    top: 0;
+    font-size: calc(15cqi * 0.77);
+  }
   .piece2Copy .papinySlesy {
     top: 20px;
     font-size: calc(15cqi * 0.82);
@@ -366,7 +411,7 @@
   font-family: Georgia, 'Times New Roman', serif;
   font-weight: bold;
   color: #0f2a66;
-  font-size: calc(15cqi * 0.85);
+  font-size: calc(15cqi * 0.925);
   line-height: 1;
   white-space: nowrap;
   text-align: center;
@@ -397,15 +442,8 @@
   }
 }
 
-/* Move only the right-side label (папины слёзы) slightly upward without affecting SUDEAL */
+/* папины слёзы: no extra offset needed */
 .piece4 a {
-  top: 34px;
-}
-
-@media (max-width: 600px) {
-  .piece4 a {
-    top: 16px;
-  }
 }
 
 .papinySlesy {
@@ -419,7 +457,7 @@
   letter-spacing: -0.04em;
   text-decoration: none;
   display: inline-block;
-  transform: translateY(-3px) scaleX(0.95) scaleY(1.4);
+  transform: scaleX(0.95) scaleY(1.9);
   transform-origin: center bottom;
   filter: blur(0.6px);
   text-shadow: none;
@@ -476,9 +514,15 @@
     max-width: 480px;
     margin-top: 6em;
   }
-  /* Tablet: move SUDEAL (left label) up 4px */
+
+  .piece3,
+  .piece4 {
+    top: 70%;
+  }
+
+  /* Tablet: SUDEAL - no extra offset */
   .piece3 a {
-    top: 36px; /* was 40px on desktop */
+    top: 0;
   }
 }
 
@@ -486,6 +530,19 @@
   .tape {
     max-width: 320px;
     margin-top: 4em;
+  }
+
+  .piece1 {
+    top: 0%;
+  }
+
+  .piece2 {
+    top: 40%;
+  }
+
+  .piece3,
+  .piece4 {
+    top: 72%;
   }
 }
 
@@ -547,15 +604,18 @@
 }
 
 @media (max-width: 600px) {
+  .ticketSection {
+    padding-top: 80px;
+  }
   .ticketBtn {
     max-width: 100%;
   }
 }
 
-/* Mobile: nudge SUDEAL (left label .piece3 a) 4px higher to match desired spacing */
+/* Mobile: SUDEAL */
 @media (max-width: 600px) {
   .piece3 a {
-    top: 17px; /* adjusted per request */
+    font-size: calc(15cqi * 0.69);
   }
 }
 

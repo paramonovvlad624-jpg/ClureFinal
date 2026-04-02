@@ -47,10 +47,9 @@ export default function TheoryFestPage() {
             <span>18+</span>
           </div>
           <div className={styles.tape}>
-            <picture>
-              <source srcSet={'/images/1-new.webp'} type="image/webp" />
-              <img data-piece="piece1" src="/images/1-new.png" alt="" className={`${styles.tapePiece} ${styles.piece1}`} />
-            </picture>
+            <div data-piece="piece1" className={`${styles.tapePiece} ${styles.piece1} ${styles.vosmoy}`}>
+              <a href="https://vk.ru/8osmoy" target="_blank" rel="noopener noreferrer" className={styles.vosmoyLink}>VOSMOY</a>
+            </div>
             <div className={`${styles.tapePiece} ${styles.piece2}`}>
               <div className={styles.piece2CopyRow}>
                 <div className={styles.piece2Copy}>
