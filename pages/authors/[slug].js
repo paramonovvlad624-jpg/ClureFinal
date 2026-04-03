@@ -95,7 +95,14 @@ export default function AuthorPage({ author, articles = [], playlistCount = 0, p
                   className={styles.authorAvatar}
                 />
               )}
-              <h1 className={styles.articleTitle} style={{ fontSize: 'clamp(48px, 10vw, 90px)', margin: 0, fontFamily: 'var(--font-sans)', fontWeight: 900, letterSpacing: '-0.02em' }}>{author.name}</h1>
+              <h1 className={styles.articleTitle} style={{ fontSize: 'clamp(48px, 10vw, 90px)', margin: 0, fontFamily: 'var(--font-sans)', fontWeight: 900, letterSpacing: '-0.02em' }}>
+                {author.name}
+                {slugify(author.name) === 'vlad-p' && (
+                  <a href="/kover" style={{ display: 'inline-block', verticalAlign: 'middle', marginLeft: 30, position: 'relative', top: -15 }}>
+                    <img src="/images/kover.PNG" alt="" style={{ width: 'clamp(32px, 6vw, 56px)', height: 'auto', borderRadius: 8 }} />
+                  </a>
+                )}
+              </h1>
             </div>
 
             {/* Spotify link */}
