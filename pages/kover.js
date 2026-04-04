@@ -232,6 +232,18 @@ export default function GamePage() {
   const [leaderboard, setLeaderboard] = useState([])
   const [showBoard, setShowBoard] = useState(false)
 
+  /* force body bg to match game page */
+  useEffect(() => {
+    const prev = document.documentElement.style.background
+    const prevBody = document.body.style.background
+    document.documentElement.style.background = '#0a0a2e'
+    document.body.style.background = '#0a0a2e'
+    return () => {
+      document.documentElement.style.background = prev
+      document.body.style.background = prevBody
+    }
+  }, [])
+
   /* load leaderboard on mount */
   useEffect(() => {
     fetchLeaderboard().then(setLeaderboard)
@@ -321,12 +333,13 @@ export default function GamePage() {
     let raf
     let prevScore = scoreRef.current
     let prevLives = livesRef.current
+    const TICK_MS = 1000 / 60
+    const MAX_TICKS = 4
+    let lastTime = performance.now()
+    let accumulator = 0
+    let gameOver = false
 
-    function tick() {
-      const g = gameRef.current
-      if (!g) return
-      const keys = keysRef.current
-
+    function update(g, keys) {
       const speed = 5
       if (keys.ArrowLeft || keys.left) g.player.x -= speed
       if (keys.ArrowRight || keys.right) g.player.x += speed
@@ -395,6 +408,7 @@ export default function GamePage() {
             g.explosions.push({ cx: g.player.x + PLAYER_W / 2, cy: g.player.y + PLAYER_H / 2, t: 0, dur: 30 })
             if (g.lives <= 0) {
               endGame(g.score)
+              gameOver = true
               return
             }
           }
@@ -404,18 +418,17 @@ export default function GamePage() {
       for (const e of g.enemies) {
         if (e.alive && e.y + ENEMY_H >= g.player.y) {
           endGame(g.score)
+          gameOver = true
           return
         }
       }
 
       /* ── boss logic ── */
       if (g.boss) {
-        // move boss
         g.boss.x += BOSS_SPEED * g.boss.dir
         if (g.boss.x <= 0 || g.boss.x + BOSS_W >= BASE_W) g.boss.dir *= -1
         if (g.boss.flash > 0) g.boss.flash--
 
-        // boss shooting (3 bullets in a spread)
         g.boss.shootTimer++
         if (g.boss.shootTimer >= BOSS_SHOOT_INTERVAL) {
           g.boss.shootTimer = 0
@@ -426,7 +439,6 @@ export default function GamePage() {
           g.enemyBullets.push({ x: cx - BULLET_W / 2 + 12, y: by, vx: 1 })
         }
 
-        // bullets vs boss
         for (const b of g.bullets) {
           if (rectsOverlap({ x: b.x, y: b.y, w: BULLET_W, h: BULLET_H }, { x: g.boss.x, y: g.boss.y, w: BOSS_W, h: BOSS_H })) {
             b.y = -100
@@ -449,7 +461,7 @@ export default function GamePage() {
         }
       }
 
-      /* ── enemy bullet movement (with spread for boss bullets) ── */
+      /* ── enemy bullet movement ── */
       for (const b of g.enemyBullets) {
         b.y += (b.vx !== undefined ? BOSS_BULLET_SPEED : ENEMY_BULLET_SPEED)
         if (b.vx) b.x += b.vx
@@ -458,7 +470,6 @@ export default function GamePage() {
       if (!g.boss && g.enemies.every((e) => !e.alive)) {
         g.wave++
         if (g.wave % BOSS_EVERY_N_WAVES === 1 && g.wave > 1) {
-          // boss wave
           g.boss = createBoss()
           g.enemies = []
           g.enemyBullets = []
@@ -476,7 +487,9 @@ export default function GamePage() {
         s.y += s.speed
         if (s.y > BASE_H) { s.y = 0; s.x = Math.random() * BASE_W }
       }
+    }
 
+    function draw(g) {
       ctx.clearRect(0, 0, BASE_W, BASE_H)
       drawStars(ctx, g.stars)
       for (const b of g.bullets) drawBullet(ctx, b)
@@ -489,15 +502,33 @@ export default function GamePage() {
         const vladosMode = isVladosName(playerName)
         drawPlayer(ctx, g.player.x, g.player.y, isBannedName(playerName) ? '#a855f7' : '#7fbacd', vladosMode)
       }
+    }
+
+    function frame(now) {
+      if (gameOver) return
+      const g = gameRef.current
+      if (!g) return
+
+      const dt = now - lastTime
+      lastTime = now
+      accumulator += Math.min(dt, MAX_TICKS * TICK_MS)
+
+      while (accumulator >= TICK_MS) {
+        update(g, keysRef.current)
+        if (gameOver) return
+        accumulator -= TICK_MS
+      }
+
+      draw(g)
 
       /* sync React state only when changed */
       if (g.score !== prevScore) { prevScore = g.score; scoreRef.current = g.score; setScore(g.score) }
       if (g.lives !== prevLives) { prevLives = g.lives; livesRef.current = g.lives; setLives(g.lives) }
 
-      raf = requestAnimationFrame(tick)
+      raf = requestAnimationFrame(frame)
     }
 
-    raf = requestAnimationFrame(tick)
+    raf = requestAnimationFrame(frame)
     return () => cancelAnimationFrame(raf)
   }, [phase, endGame])
 
