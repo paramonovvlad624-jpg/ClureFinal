@@ -615,7 +615,7 @@
 /* Mobile: SUDEAL */
 @media (max-width: 600px) {
   .piece3 a {
-    font-size: calc(15cqi * 0.69);
+    font-size: calc(15cqi * 0.77);
   }
 }
 

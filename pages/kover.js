@@ -173,15 +173,19 @@ function drawBoss(ctx, boss) {
   ctx.strokeRect(barX, barY, barW, barH)
 }
 
-function createBoss() {
+function createBoss(wave) {
+  const bossNum = Math.floor(wave / BOSS_EVERY_N_WAVES)
+  const hp = BOSS_HP + bossNum * 10
   return {
     x: BASE_W / 2 - BOSS_W / 2,
     y: 30,
-    hp: BOSS_HP,
-    maxHp: BOSS_HP,
+    hp,
+    maxHp: hp,
     dir: 1,
     shootTimer: 0,
     flash: 0,
+    speed: Math.min(3, BOSS_SPEED + bossNum * 0.4),
+    shootInterval: Math.max(20, BOSS_SHOOT_INTERVAL - bossNum * 8),
   }
 }
 
@@ -425,12 +429,12 @@ export default function GamePage() {
 
       /* ── boss logic ── */
       if (g.boss) {
-        g.boss.x += BOSS_SPEED * g.boss.dir
+        g.boss.x += g.boss.speed * g.boss.dir
         if (g.boss.x <= 0 || g.boss.x + BOSS_W >= BASE_W) g.boss.dir *= -1
         if (g.boss.flash > 0) g.boss.flash--
 
         g.boss.shootTimer++
-        if (g.boss.shootTimer >= BOSS_SHOOT_INTERVAL) {
+        if (g.boss.shootTimer >= g.boss.shootInterval) {
           g.boss.shootTimer = 0
           const cx = g.boss.x + BOSS_W / 2
           const by = g.boss.y + BOSS_H
@@ -453,7 +457,8 @@ export default function GamePage() {
               g.boss = null
               g.wave++
               g.enemies = createEnemies()
-              g.enemySpeed = Math.min(2, 0.4 + g.wave * 0.15)
+              g.enemyDir = 1
+              g.enemySpeed = Math.min(3.5, 0.4 + g.wave * 0.3)
               g.enemyBullets = []
               break
             }
@@ -467,15 +472,16 @@ export default function GamePage() {
         if (b.vx) b.x += b.vx
       }
 
-      if (!g.boss && g.enemies.every((e) => !e.alive)) {
+      if (!g.boss && g.enemies.length > 0 && g.enemies.every((e) => !e.alive)) {
         g.wave++
         if (g.wave % BOSS_EVERY_N_WAVES === 1 && g.wave > 1) {
-          g.boss = createBoss()
+          g.boss = createBoss(g.wave)
           g.enemies = []
           g.enemyBullets = []
         } else {
           g.enemies = createEnemies()
-          g.enemySpeed = Math.min(2, 0.4 + g.wave * 0.15)
+          g.enemyDir = 1
+          g.enemySpeed = Math.min(3.5, 0.4 + g.wave * 0.3)
           g.enemyBullets = []
         }
       }
