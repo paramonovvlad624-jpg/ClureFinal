@@ -1,6 +1,8 @@
 import { useRef, useEffect, useState, useCallback } from 'react'
 import Head from 'next/head'
 import Link from 'next/link'
+import { db } from '../lib/firebase'
+import { collection, addDoc, query, orderBy, limit, getDocs } from 'firebase/firestore'
 import styles from '../components/Game.module.css'
 
 /* ─── constants ─── */
@@ -17,8 +19,8 @@ const ENEMY_ROWS = 4
 const ENEMY_PAD = 14
 const ENEMY_BULLET_SPEED = 3.5
 const STAR_COUNT = 80
-const STORAGE_KEY = 'kover_leaderboard_v2'
 const MAX_LEADERBOARD = 10
+const LB_COLLECTION = 'kover_leaderboard'
 
 /* ─── boss constants ─── */
 const BOSS_W = 120
@@ -60,18 +62,19 @@ function createEnemies() {
   return enemies
 }
 
-function loadLeaderboard() {
+async function fetchLeaderboard() {
   try {
-    const raw = localStorage.getItem(STORAGE_KEY)
-    return raw ? JSON.parse(raw) : []
+    const q = query(collection(db, LB_COLLECTION), orderBy('score', 'desc'), limit(MAX_LEADERBOARD))
+    const snap = await getDocs(q)
+    return snap.docs.map(d => d.data())
   } catch {
     return []
   }
 }
 
-function saveLeaderboard(board) {
+async function addScoreEntry(entry) {
   try {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(board))
+    await addDoc(collection(db, LB_COLLECTION), entry)
   } catch { /* ignore */ }
 }
 
@@ -119,13 +122,13 @@ function drawEnemy(ctx, e) {
     if (dh > ENEMY_H) { dh = ENEMY_H; dw = ENEMY_H * aspect }
     const dx = e.x + (ENEMY_W - dw) / 2
     const dy = e.y + (ENEMY_H - dh) / 2
+    ctx.drawImage(enemyImg, dx, dy, dw, dh)
     if (e.flash > 0) {
       ctx.save()
-      ctx.filter = 'brightness(3)'
-      ctx.drawImage(enemyImg, dx, dy, dw, dh)
+      ctx.globalAlpha = 0.6
+      ctx.fillStyle = '#fff'
+      ctx.fillRect(dx, dy, dw, dh)
       ctx.restore()
-    } else {
-      ctx.drawImage(enemyImg, dx, dy, dw, dh)
     }
   } else {
     ctx.fillStyle = e.flash > 0 ? '#fff' : '#e85d75'
@@ -144,9 +147,11 @@ function drawBoss(ctx, boss) {
     const dx = boss.x + (BOSS_W - dw) / 2
     const dy = boss.y + (BOSS_H - dh) / 2
     if (boss.flash > 0) {
-      ctx.save()
-      ctx.filter = 'brightness(2)'
       ctx.drawImage(bossImg, dx, dy, dw, dh)
+      ctx.save()
+      ctx.globalAlpha = 0.5
+      ctx.fillStyle = '#fff'
+      ctx.fillRect(dx, dy, dw, dh)
       ctx.restore()
     } else {
       ctx.drawImage(bossImg, dx, dy, dw, dh)
@@ -193,9 +198,8 @@ function drawEnemyBullet(ctx, b) {
 function drawStars(ctx, stars) {
   ctx.fillStyle = 'rgba(255,255,255,0.6)'
   for (const s of stars) {
-    ctx.beginPath()
-    ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2)
-    ctx.fill()
+    const size = s.r * 2
+    ctx.fillRect(s.x, s.y, size, size)
   }
 }
 
@@ -206,13 +210,10 @@ function drawExplosion(ctx, exp) {
   ctx.globalAlpha = alpha
   const r = 8 + (exp.t / exp.dur) * 18
   ctx.fillStyle = '#ffaa44'
-  ctx.beginPath()
-  ctx.arc(exp.cx, exp.cy, r, 0, Math.PI * 2)
-  ctx.fill()
+  ctx.fillRect(exp.cx - r, exp.cy - r, r * 2, r * 2)
   ctx.fillStyle = '#fff'
-  ctx.beginPath()
-  ctx.arc(exp.cx, exp.cy, r * 0.4, 0, Math.PI * 2)
-  ctx.fill()
+  const ri = r * 0.4
+  ctx.fillRect(exp.cx - ri, exp.cy - ri, ri * 2, ri * 2)
   ctx.restore()
 }
 
@@ -231,7 +232,7 @@ export default function GamePage() {
 
   /* load leaderboard on mount */
   useEffect(() => {
-    setLeaderboard(loadLeaderboard())
+    fetchLeaderboard().then(setLeaderboard)
   }, [])
 
   const initGame = useCallback(() => {
@@ -301,9 +302,7 @@ export default function GamePage() {
   const endGame = useCallback((finalPts) => {
     setFinalScore(finalPts)
     const entry = { name: playerName.trim() || '???', score: finalPts, date: new Date().toLocaleDateString('ru-RU') }
-    const board = [...loadLeaderboard(), entry].sort((a, b) => b.score - a.score).slice(0, MAX_LEADERBOARD)
-    saveLeaderboard(board)
-    setLeaderboard(board)
+    addScoreEntry(entry).then(() => fetchLeaderboard()).then(setLeaderboard)
     setPhase('over')
   }, [playerName])
 
@@ -575,6 +574,8 @@ export default function GamePage() {
       <Head>
         <title>Ковёр</title>
         <meta name="robots" content="noindex, nofollow" />
+        <meta name="theme-color" content="#0a0a2e" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
       </Head>
 
       <div className={styles.wrapper}>
