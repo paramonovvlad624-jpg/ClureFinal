@@ -222,6 +222,8 @@ export default function GamePage() {
   const canvasRef = useRef(null)
   const gameRef = useRef(null)
   const keysRef = useRef({})
+  const scoreRef = useRef(0)
+  const livesRef = useRef(3)
   const [phase, setPhase] = useState('idle') // idle | name | playing | over
   const [score, setScore] = useState(0)
   const [lives, setLives] = useState(3)
@@ -283,6 +285,8 @@ export default function GamePage() {
     if (!playerName.trim()) return
     const g = initGame()
     gameRef.current = g
+    scoreRef.current = 0
+    livesRef.current = 3
     setScore(0)
     setLives(3)
     setPhase('playing')
@@ -293,6 +297,8 @@ export default function GamePage() {
     if (!playerName.trim()) return
     const g = initGame()
     gameRef.current = g
+    scoreRef.current = 0
+    livesRef.current = 3
     setScore(0)
     setLives(3)
     setPhase('playing')
@@ -313,6 +319,8 @@ export default function GamePage() {
     if (!canvas) return
     const ctx = canvas.getContext('2d')
     let raf
+    let prevScore = scoreRef.current
+    let prevLives = livesRef.current
 
     function tick() {
       const g = gameRef.current
@@ -366,7 +374,6 @@ export default function GamePage() {
             e.alive = false
             b.y = -100
             g.score += 10
-            setScore(g.score)
             g.explosions.push({ cx: e.x + ENEMY_W / 2, cy: e.y + ENEMY_H / 2, t: 0, dur: 20 })
           }
         }
@@ -385,7 +392,6 @@ export default function GamePage() {
             b.y = BASE_H + 100
             g.lives--
             g.invincible = 90
-            setLives(g.lives)
             g.explosions.push({ cx: g.player.x + PLAYER_W / 2, cy: g.player.y + PLAYER_H / 2, t: 0, dur: 30 })
             if (g.lives <= 0) {
               endGame(g.score)
@@ -427,13 +433,11 @@ export default function GamePage() {
             g.boss.hp--
             g.boss.flash = 4
             g.score += 5
-            setScore(g.score)
             if (g.boss.hp <= 0) {
               g.explosions.push({ cx: g.boss.x + BOSS_W / 2, cy: g.boss.y + BOSS_H / 2, t: 0, dur: 40 })
               g.explosions.push({ cx: g.boss.x + BOSS_W * 0.25, cy: g.boss.y + BOSS_H * 0.3, t: 0, dur: 30 })
               g.explosions.push({ cx: g.boss.x + BOSS_W * 0.75, cy: g.boss.y + BOSS_H * 0.7, t: 0, dur: 30 })
               g.score += 100
-              setScore(g.score)
               g.boss = null
               g.wave++
               g.enemies = createEnemies()
@@ -485,6 +489,10 @@ export default function GamePage() {
         const vladosMode = isVladosName(playerName)
         drawPlayer(ctx, g.player.x, g.player.y, isBannedName(playerName) ? '#a855f7' : '#7fbacd', vladosMode)
       }
+
+      /* sync React state only when changed */
+      if (g.score !== prevScore) { prevScore = g.score; scoreRef.current = g.score; setScore(g.score) }
+      if (g.lives !== prevLives) { prevLives = g.lives; livesRef.current = g.lives; setLives(g.lives) }
 
       raf = requestAnimationFrame(tick)
     }
