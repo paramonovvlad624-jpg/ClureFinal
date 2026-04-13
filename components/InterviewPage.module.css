@@ -254,6 +254,35 @@
   padding: 0 10px;
 }
 
+/* ─── Ticket button section ─── */
+.ticketButtonSection {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 60px 40px;
+}
+
+.ticketButton {
+  display: inline-block;
+  padding: 18px 60px;
+  background: var(--color-white);
+  color: #87c1d3;
+  font-family: 'Times New Roman', 'Georgia', serif;
+  font-weight: 600;
+  font-size: 20px;
+  letter-spacing: -0.4px;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  border: 2px solid var(--color-white);
+}
+
+.ticketButton:hover {
+  background: transparent;
+  color: var(--color-white);
+}
+
 /* ─── Responsive – Tablet (1024px) ─── */
 @media (max-width: 1024px) {
   .header {

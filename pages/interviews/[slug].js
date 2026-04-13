@@ -197,6 +197,13 @@ export default function InterviewPage({ interview, moreInterviews = [], slug }) 
               </div>
             </section>
           )}
+
+          {/* ── Buy ticket button ── */}
+          <div className={styles.ticketButtonSection}>
+            <a href="/theory-fest" className={styles.ticketButton}>
+              Купить Билет
+            </a>
+          </div>
         </main>
       </div>
 
