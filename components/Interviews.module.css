@@ -1,0 +1,107 @@
+/* ─── Interview list wrapper ─── */
+.wrapper {
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 24px;
+  background: #87c1d3;
+}
+
+/* Vertical list layout */
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  padding: 20px 0;
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+/* ─── List item ─── */
+.listItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 24px 30px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  color: var(--color-white);
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.listItem:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.itemContent {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1;
+}
+
+.itemGuest {
+  font-family: 'Times New Roman', 'Georgia', serif;
+  font-size: 16px;
+  font-style: italic;
+  color: rgba(255, 255, 255, 0.8);
+  letter-spacing: -0.3px;
+}
+
+.itemTitle {
+  font-family: 'Times New Roman', 'Georgia', serif;
+  font-size: 28px;
+  font-weight: 400;
+  line-height: 1.2;
+  letter-spacing: -0.6px;
+  color: var(--color-white);
+}
+
+.itemDate {
+  font-family: 'Times New Roman', 'Georgia', serif;
+  font-size: 14px;
+  font-style: italic;
+  color: rgba(255, 255, 255, 0.7);
+  white-space: nowrap;
+  margin-left: 40px;
+  align-self: flex-end;
+}
+
+/* ─── Responsive ─── */
+@media (max-width: 768px) {
+  .listItem {
+    flex-direction: column;
+    gap: 12px;
+    padding: 20px 20px;
+  }
+
+  .itemTitle {
+    font-size: 20px;
+  }
+
+  .itemDate {
+    margin-left: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .wrapper {
+    padding: 0 16px;
+  }
+
+  .listItem {
+    padding: 16px 16px;
+  }
+
+  .itemTitle {
+    font-size: 18px;
+  }
+
+  .itemGuest {
+    font-size: 14px;
+  }
+
+  .itemDate {
+    font-size: 12px;
+  }
+}
+

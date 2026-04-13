@@ -9,6 +9,7 @@ import filterStyles from '../../components/Filters.module.css'
 
 const ARTICLES_NAV = [
   { href: '/', label: 'Главная' },
+  { href: '/interviews', label: 'Интервью' },
   { href: '/playlists', label: 'Плейлисты' },
   { href: '/about', label: 'О нас' },
   { href: '/theory-fest', label: 'Theory Fest' },

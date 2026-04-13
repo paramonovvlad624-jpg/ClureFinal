@@ -4,6 +4,7 @@ import styles from './Navigation.module.css'
 
 const DEFAULT_LINKS = [
   { href: '/articles', label: 'Статьи' },
+  { href: '/interviews', label: 'Интервью' },
   { href: '/playlists', label: 'Плейлисты' },
   { href: '/about', label: 'О нас' },
   { href: '/theory-fest', label: 'Theory Fest' },

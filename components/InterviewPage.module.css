@@ -1,0 +1,360 @@
+/* ─── Interview page – matches article page structure ─── */
+
+/* Whole page wrapper – solid accent background */
+.page {
+  background: #87c1d3;
+  min-height: 100vh;
+  padding-bottom: 10px;
+}
+
+/* Body container – flex column with 10px gaps between sections */
+.body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 10px;
+}
+
+/* ─── Header section ─── */
+.header {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 264px 30px 160px;
+  color: var(--color-white);
+  border-radius: 8px;
+  gap: 97px;
+}
+
+.interviewTitle {
+  font-family: 'Times New Roman', 'Georgia', serif;
+  font-weight: 400;
+  font-size: clamp(48px, 10vw, 80px);
+  line-height: 0.95;
+  letter-spacing: clamp(-1px, -3.2px, -3.2px);
+  color: var(--color-white);
+  max-width: 1200px;
+  word-break: break-word;
+}
+
+.metaRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  font-family: 'Times New Roman', 'Georgia', serif;
+  font-style: italic;
+  font-size: clamp(36px, 7vw, 56px);
+  line-height: 0.9;
+  letter-spacing: clamp(-0.8px, -1.6px, -1.6px);
+  color: var(--color-white);
+}
+
+/* ─── Hero image ─── */
+.heroImage {
+  width: 100%;
+  aspect-ratio: 2 / 1;
+  border-radius: 8px;
+  overflow: hidden;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.heroImg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  border-radius: 8px;
+}
+
+/* ─── Intro section ─── */
+.intro {
+  width: 100%;
+  display: flex;
+  gap: 40px;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 70px 40px 74px;
+  font-family: 'Times New Roman', 'Georgia', serif;
+  font-weight: 400;
+  font-style: italic;
+  font-size: 24px;
+  line-height: 1.4;
+  letter-spacing: -0.4px;
+  color: var(--color-white);
+}
+
+.introLabel {
+  flex-shrink: 0;
+  width: auto;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.infoSpan {
+  white-space: nowrap;
+}
+
+.separator {
+  color: rgba(255, 255, 255, 0.6);
+  white-space: nowrap;
+}
+
+.introText {
+  flex: 1;
+  max-width: 540px;
+  text-align: left;
+}
+
+/* ─── Content section ─── */
+.content {
+  width: 100%;
+  max-width: 540px;
+  padding: 80px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 74px;
+}
+
+.rtParagraph {
+  font-family: 'Times New Roman', 'Georgia', serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 18px;
+  line-height: 1.6;
+  letter-spacing: -0.2px;
+  color: var(--color-white);
+  margin: 0 0 1.2em;
+}
+
+.rtParagraph:last-child {
+  margin-bottom: 0;
+}
+
+.rtH2 {
+  font-family: 'Times New Roman', 'Georgia', serif;
+  font-weight: 400;
+  font-size: 40px;
+  line-height: 1.1;
+  letter-spacing: -1.2px;
+  color: var(--color-white);
+  margin: 1.6em 0 0.5em;
+}
+
+.rtH3 {
+  font-family: 'Times New Roman', 'Georgia', serif;
+  font-weight: 400;
+  font-size: 28px;
+  line-height: 1.15;
+  letter-spacing: -0.6px;
+  color: var(--color-white);
+  margin: 1.4em 0 0.4em;
+}
+
+.rtBlockquote {
+  border-left: 3px solid rgba(255, 255, 255, 0.5);
+  margin: 1.6em 0;
+  padding: 0.2em 0 0.2em 24px;
+  font-style: italic;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.rtFigure {
+  margin: 2em 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.rtImage {
+  width: 100%;
+  height: auto;
+  border-radius: 6px;
+  display: block;
+}
+
+.rtCaption {
+  font-size: 14px;
+  font-style: italic;
+  color: rgba(255, 255, 255, 0.8);
+  text-align: center;
+}
+
+.rtLink {
+  color: rgba(255, 255, 255, 0.9);
+  text-decoration: underline;
+  transition: color 0.2s ease;
+}
+
+.rtLink:hover {
+  color: var(--color-white);
+}
+
+/* ─── Related section ─── */
+.relatedSection {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+  padding: 80px 0;
+}
+
+.relatedTitle {
+  font-family: 'Times New Roman', 'Georgia', serif;
+  font-weight: 400;
+  font-size: 36px;
+  line-height: 1;
+  letter-spacing: -0.8px;
+  color: var(--color-white);
+  text-align: center;
+}
+
+.relatedGrid {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  padding: 0 10px;
+}
+
+/* ─── Responsive – Tablet (1024px) ─── */
+@media (max-width: 1024px) {
+  .header {
+    padding: 180px 30px 120px;
+    gap: 60px;
+  }
+
+  .interviewTitle {
+    font-size: clamp(48px, 10vw, 80px);
+  }
+
+  .metaRow {
+    font-size: clamp(36px, 7vw, 56px);
+    gap: 16px;
+  }
+
+  .heroImage {
+    aspect-ratio: 16 / 9;
+  }
+
+  .intro {
+    padding: 60px 40px;
+    gap: 30px;
+  }
+
+  .content {
+    max-width: 620px;
+    padding: 60px 0;
+  }
+
+  .rtH2 {
+    font-size: 32px;
+    letter-spacing: -0.8px;
+  }
+
+  .rtH3 {
+    font-size: 24px;
+    letter-spacing: -0.4px;
+  }
+
+  .relatedGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .relatedTitle {
+    font-size: 32px;
+  }
+}
+
+/* ─── Responsive – Mobile (600px) ─── */
+@media (max-width: 600px) {
+  .header {
+    padding: 96px 0 40px;
+    gap: 32px;
+  }
+
+  .interviewTitle {
+    font-size: clamp(28px, 9vw, 48px);
+    letter-spacing: -1px;
+    padding: 0 20px;
+  }
+
+  .metaRow {
+    font-size: clamp(18px, 5vw, 30px);
+    gap: 8px;
+    letter-spacing: -0.6px;
+  }
+
+  .heroImage {
+    aspect-ratio: 16 / 9;
+  }
+
+  .intro {
+    flex-direction: column;
+    padding: 40px 20px;
+    gap: 20px;
+    font-size: 16px;
+  }
+
+  .introLabel {
+    width: auto;
+  }
+
+  .introText {
+    font-size: 16px;
+  }
+
+  .content {
+    max-width: 100%;
+    padding: 40px 20px 80px;
+    gap: 40px;
+  }
+
+  .rtParagraph {
+    font-size: 16px;
+    line-height: 1.5;
+  }
+
+  .rtH2 {
+    font-size: 24px;
+    letter-spacing: -0.4px;
+  }
+
+  .rtH3 {
+    font-size: 20px;
+    letter-spacing: -0.2px;
+  }
+
+  .rtBlockquote {
+    padding: 0.2em 0 0.2em 16px;
+    font-size: 16px;
+  }
+
+  .relatedSection {
+    padding: 60px 20px;
+    gap: 32px;
+  }
+
+  .relatedTitle {
+    font-size: 24px;
+  }
+
+  .relatedGrid {
+    grid-template-columns: 1fr;
+  }
+}
+

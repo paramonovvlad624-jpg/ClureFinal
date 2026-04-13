@@ -40,6 +40,7 @@ const portableTextComponents = {
 const ARTICLE_NAV = [
   { href: '/', label: 'Главная' },
   { href: '/articles', label: 'Статьи' },
+  { href: '/interviews', label: 'Интервью' },
   { href: '/playlists', label: 'Плейлисты' },
   { href: '/about', label: 'О нас' },
   { href: '/theory-fest', label: 'Theory Fest' },

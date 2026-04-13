@@ -11,6 +11,7 @@ import s from '../components/About.module.css'
 const ABOUT_NAV = [
   { href: '/', label: 'Главная' },
   { href: '/articles', label: 'Статьи' },
+  { href: '/interviews', label: 'Интервью' },
   { href: '/playlists', label: 'Плейлисты' },
   { href: '/theory-fest', label: 'Theory Fest' },
 ]
