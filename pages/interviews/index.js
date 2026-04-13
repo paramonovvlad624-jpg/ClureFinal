@@ -14,7 +14,7 @@ const INTERVIEWS_NAV = [
 ]
 
 const queryAllInterviews = `*[_type == "interview"]| order(publishedAt desc){
-  _id, title, excerpt, slug, publishedAt, mainImage, guest, interviewer
+  _id, title, excerpt, slug, publishedAt, mainImage, guest, interviewer->{name}
 }`
 
 export async function getStaticProps() {

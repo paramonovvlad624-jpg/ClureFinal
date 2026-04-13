@@ -11,6 +11,7 @@ function formatDate(dateStr) {
 export default function InterviewCard({ title = 'Interview title', slug = null, publishedAt = null, guest = null }) {
   const router = useRouter()
   const date = formatDate(publishedAt)
+  const guestName = guest || 'Guest'
 
   const handleClick = () => {
     if (slug) router.push(`/interviews/${slug}`)
@@ -23,7 +24,7 @@ export default function InterviewCard({ title = 'Interview title', slug = null, 
       style={slug ? { cursor: 'pointer' } : undefined}
     >
       <div className={styles.itemContent}>
-        <div className={styles.itemGuest}>{guest}</div>
+        {guestName && <div className={styles.itemGuest}>{guestName}</div>}
         <div className={styles.itemTitle}>{title}</div>
       </div>
       {date && <div className={styles.itemDate}>{date}</div>}

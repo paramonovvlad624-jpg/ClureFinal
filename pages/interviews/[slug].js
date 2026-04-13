@@ -46,7 +46,7 @@ const INTERVIEW_NAV = [
 ]
 
 const queryBySlug = `*[_type == "interview" && slug.current == $slug][0]{
-  _id, title, excerpt, body, publishedAt, mainImage, guest, interviewer
+  _id, title, excerpt, body, publishedAt, mainImage, guest, interviewer->{name}
 }`
 
 const queryMore = `*[_type == "interview" && slug.current != $slug] | order(publishedAt desc)[0...3]{
@@ -125,6 +125,13 @@ export default function InterviewPage({ interview, moreInterviews = [], slug }) 
             </div>
           </header>
 
+          {/* ── Excerpt (Short Description) ── */}
+          {interview.excerpt && (
+            <div className={styles.excerptSection}>
+              <p className={styles.excerptText}>{interview.excerpt}</p>
+            </div>
+          )}
+
           {/* ── Hero image ── */}
           {imageUrl && (
             <div className={styles.heroImage}>
@@ -133,12 +140,12 @@ export default function InterviewPage({ interview, moreInterviews = [], slug }) 
           )}
 
           {/* ── Interview metadata ── */}
-          {(interview.guest || interview.interviewer) && (
+          {(interview.guest || interview.interviewer?.name) && (
             <div className={styles.intro}>
               <span className={styles.introLabel}>
                 {interview.guest && <span className={styles.infoSpan}><strong>Гость:</strong> {interview.guest}</span>}
-                {interview.guest && interview.interviewer && <span className={styles.separator}>·</span>}
-                {interview.interviewer && <span className={styles.infoSpan}><strong>Интервьюер:</strong> {interview.interviewer}</span>}
+                {interview.guest && interview.interviewer?.name && <span className={styles.separator}>·</span>}
+                {interview.interviewer?.name && <span className={styles.infoSpan}><strong>Интервьюер:</strong> {interview.interviewer.name}</span>}
               </span>
             </div>
           )}

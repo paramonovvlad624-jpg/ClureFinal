@@ -25,6 +25,8 @@ const queryArticlesByAuthor = `*[_type == "article" && author._ref == $authorId]
 
 const queryPlaylistCount = `count(*[_type == "playlist" && author._ref == $authorId])`
 
+const queryInterviewCount = `count(*[_type == "interview" && (guest._ref == $authorId || interviewer._ref == $authorId)])`
+
 const queryPlaylistsByAuthor = `*[_type == "playlist" && author._ref == $authorId] | order(order asc, _createdAt desc){
   _id, title, url, platform, description
 }`
@@ -46,14 +48,15 @@ export async function getStaticProps({ params }) {
 
   const articles = await client.fetch(queryArticlesByAuthor, { authorId: author._id })
   const playlistCount = await client.fetch(queryPlaylistCount, { authorId: author._id })
+  const interviewCount = await client.fetch(queryInterviewCount, { authorId: author._id })
   const playlists = await client.fetch(queryPlaylistsByAuthor, { authorId: author._id })
 
   return {
-    props: { author, articles: articles || [], playlistCount: playlistCount || 0, playlists: playlists || [] },
+    props: { author, articles: articles || [], playlistCount: playlistCount || 0, interviewCount: interviewCount || 0, playlists: playlists || [] },
   }
 }
 
-export default function AuthorPage({ author, articles = [], playlistCount = 0, playlists = [] }) {
+export default function AuthorPage({ author, articles = [], playlistCount = 0, interviewCount = 0, playlists = [] }) {
   const imageUrl = author.image
     ? urlFor(author.image).width(400).height(400).auto('format').url()
     : null
@@ -135,18 +138,30 @@ export default function AuthorPage({ author, articles = [], playlistCount = 0, p
 
             {/* Row 2: stats (centered) */}
             <div className={styles.authorStats}>
-              <div className={styles.authorStat}>
-                <span className={styles.authorStatNum}>
-                  {articles.length}
-                </span>
-                {articles.length === 1 ? 'статья' : articles.length >= 2 && articles.length <= 4 ? 'статьи' : 'статей'}
-              </div>
-              <div className={styles.authorStat}>
-                <span className={styles.authorStatNum}>
-                  {playlistCount}
-                </span>
-                {playlistCount === 1 ? 'плейлист' : playlistCount >= 2 && playlistCount <= 4 ? 'плейлиста' : 'плейлистов'}
-              </div>
+              {articles.length > 0 && (
+                <div className={styles.authorStat}>
+                  <span className={styles.authorStatNum}>
+                    {articles.length}
+                  </span>
+                  {articles.length === 1 ? 'статья' : articles.length >= 2 && articles.length <= 4 ? 'статьи' : 'статей'}
+                </div>
+              )}
+              {interviewCount > 0 && (
+                <div className={styles.authorStat}>
+                  <span className={styles.authorStatNum}>
+                    {interviewCount}
+                  </span>
+                  {interviewCount === 1 ? 'интервью' : interviewCount >= 2 && interviewCount <= 4 ? 'интервью' : 'интервью'}
+                </div>
+              )}
+              {playlistCount > 0 && (
+                <div className={styles.authorStat}>
+                  <span className={styles.authorStatNum}>
+                    {playlistCount}
+                  </span>
+                  {playlistCount === 1 ? 'плейлист' : playlistCount >= 2 && playlistCount <= 4 ? 'плейлиста' : 'плейлистов'}
+                </div>
+              )}
             </div>
 
           </div>

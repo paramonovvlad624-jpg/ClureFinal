@@ -7,9 +7,9 @@ const client = sanityClient({
 })
 
 client
-  .fetch('*[_type == "article"] | order(publishedAt desc)[0...10]{_id, title, slug, publishedAt}')
+  .fetch('*[_type == "interview" && defined(slug.current)]{ "slug": slug.current }')
   .then((res) => {
-    console.log('Found', res.length, 'articles:')
+    console.log('Slug query result:')
     console.log(JSON.stringify(res, null, 2))
   })
   .catch((err) => console.error('Error:', err.message))
