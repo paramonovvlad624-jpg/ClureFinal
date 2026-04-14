@@ -20,6 +20,7 @@ export default function InterviewsList({ items = [], max = 100, showAllButton = 
                 slug={it.slug?.current}
                 publishedAt={it.publishedAt}
                 guest={it.guest}
+                interviewer={it.interviewer}
               />
             ))}
       </div>

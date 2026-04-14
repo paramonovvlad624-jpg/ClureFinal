@@ -7,6 +7,7 @@ import styles from '../components/TheoryFest.module.css'
 const NAV_LINKS = [
   { href: '/', label: 'Главная' },
   { href: '/articles', label: 'Статьи' },
+  { href: '/interviews', label: 'Интервью' },
   { href: '/playlists', label: 'Плейлисты' },
   { href: '/about', label: 'О нас' },
 ]

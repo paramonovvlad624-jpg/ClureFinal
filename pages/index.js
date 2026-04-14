@@ -4,10 +4,11 @@ import client from '../lib/sanity'
 import Navigation from '../components/Navigation'
 import Hero from '../components/Hero'
 import ArticlesList from '../components/ArticlesList'
+import News from '../components/News'
 import Footer from '../components/Footer'
 import styles from '../components/TheoryFest.module.css'
 
-export default function Home({ page, articles = [] }) {
+export default function Home({ page, articles = [], interviews = [], playlists = [] }) {
   const title = page?.title || 'Clure.'
 
   return (
@@ -16,7 +17,11 @@ export default function Home({ page, articles = [] }) {
         <title>{title}</title>
       </Head>
       <Navigation />
-      <Hero />
+      <Hero scrollTarget="news" />
+      <section style={{ background: '#87c1d3' }}>
+        <News interviews={interviews} playlists={playlists} max={3} />
+      </section>
+
       <main style={{ background: '#87c1d3' }}>
         <ArticlesList items={articles} />
       </main>
@@ -69,11 +74,15 @@ export default function Home({ page, articles = [] }) {
 export async function getStaticProps() {
   let page = null
   let articles = []
+  let interviews = []
+  let playlists = []
   try {
     page = await client.fetch('*[_type == "page"][0]{title, body}')
     articles = await client.fetch('*[_type == "article"] | order(publishedAt desc)[0...4]{_id, title, excerpt, slug, publishedAt, mainImage, author->{name, slug, image}}')
+    interviews = await client.fetch('*[_type == "interview"] | order(publishedAt desc)[0...6]{_id, title, excerpt, slug, publishedAt, guest, interviewer->{name}}')
+    playlists = await client.fetch('*[_type == "playlist"] | order(order desc, _createdAt desc)[0...6]{_id, title, url, platform, description, author->{name}}')
   } catch (e) {
     // ignore if Sanity is not configured yet
   }
-  return { props: { page: page || null, articles: articles || [] } }
+  return { props: { page: page || null, articles: articles || [], interviews: interviews || [], playlists: playlists || [] } }
 }

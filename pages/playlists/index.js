@@ -8,6 +8,7 @@ import s from '../../components/Playlists.module.css'
 const PLAYLISTS_NAV = [
   { href: '/', label: 'Главная' },
   { href: '/articles', label: 'Статьи' },
+  { href: '/interviews', label: 'Интервью' },
   { href: '/about', label: 'О нас' },
   { href: '/theory-fest', label: 'Theory Fest' },
 ]
@@ -70,7 +71,7 @@ export async function getStaticProps() {
   let playlists = []
   try {
     playlists = await client.fetch(
-      '*[_type == "playlist"] | order(order asc, _createdAt desc){_id, title, url, platform, description, author->{name}}'
+      '*[_type == "playlist"] | order(order desc, _createdAt desc){_id, title, url, platform, description, author->{name}}'
     )
   } catch (e) {
     // ignore if Sanity is not configured yet

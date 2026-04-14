@@ -5,6 +5,7 @@ import urlFor from '../../lib/imageUrl'
 import slugify from '../../lib/slugify'
 import Navigation from '../../components/Navigation'
 import ArticlesList from '../../components/ArticlesList'
+import InterviewsList from '../../components/InterviewsList'
 import Footer from '../../components/Footer'
 import styles from '../../components/ArticlePage.module.css'
 import s from '../../components/Playlists.module.css'
@@ -12,6 +13,7 @@ import s from '../../components/Playlists.module.css'
 const AUTHOR_NAV = [
   { href: '/', label: 'Главная' },
   { href: '/articles', label: 'Статьи' },
+  { href: '/interviews', label: 'Интервью' },
   { href: '/playlists', label: 'Плейлисты' },
   { href: '/about', label: 'О нас' },
   { href: '/theory-fest', label: 'Theory Fest' },
@@ -27,8 +29,12 @@ const queryPlaylistCount = `count(*[_type == "playlist" && author._ref == $autho
 
 const queryInterviewCount = `count(*[_type == "interview" && (guest._ref == $authorId || interviewer._ref == $authorId)])`
 
-const queryPlaylistsByAuthor = `*[_type == "playlist" && author._ref == $authorId] | order(order asc, _createdAt desc){
+const queryPlaylistsByAuthor = `*[_type == "playlist" && author._ref == $authorId] | order(order desc, _createdAt desc){
   _id, title, url, platform, description
+}`
+
+const queryInterviewsByAuthor = `*[_type == "interview" && (guest._ref == $authorId || interviewer._ref == $authorId)] | order(publishedAt desc){
+  _id, title, slug, publishedAt, guest, interviewer->{name}
 }`
 
 export async function getStaticPaths() {
@@ -50,13 +56,14 @@ export async function getStaticProps({ params }) {
   const playlistCount = await client.fetch(queryPlaylistCount, { authorId: author._id })
   const interviewCount = await client.fetch(queryInterviewCount, { authorId: author._id })
   const playlists = await client.fetch(queryPlaylistsByAuthor, { authorId: author._id })
+  const interviews = await client.fetch(queryInterviewsByAuthor, { authorId: author._id })
 
   return {
-    props: { author, articles: articles || [], playlistCount: playlistCount || 0, interviewCount: interviewCount || 0, playlists: playlists || [] },
+    props: { author, articles: articles || [], playlistCount: playlistCount || 0, interviewCount: interviewCount || 0, playlists: playlists || [], interviews: interviews || [] },
   }
 }
 
-export default function AuthorPage({ author, articles = [], playlistCount = 0, interviewCount = 0, playlists = [] }) {
+export default function AuthorPage({ author, articles = [], playlistCount = 0, interviewCount = 0, playlists = [], interviews = [] }) {
   const imageUrl = author.image
     ? urlFor(author.image).width(400).height(400).auto('format').url()
     : null
@@ -174,9 +181,14 @@ export default function AuthorPage({ author, articles = [], playlistCount = 0, i
 
         <main className={styles.body} style={{ paddingTop: 10, paddingBottom: 10 }}>
 
+          {/* ── Author's interviews ── */}
+          {interviews.length > 0 && (
+            <InterviewsList items={interviews} max={100} showAllButton={false} />
+          )}
+
           {/* ── Author's playlists ── */}
           {playlists.length > 0 && (
-            <section style={{ width: '100%', maxWidth: 900, margin: '0 auto' }}>
+            <section style={{ width: '100%', margin: '0 auto' }}>
               <div 
                 className={s.list} 
                 style={{ 

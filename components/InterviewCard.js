@@ -8,10 +8,9 @@ function formatDate(dateStr) {
   return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
 }
 
-export default function InterviewCard({ title = 'Interview title', slug = null, publishedAt = null, guest = null }) {
+export default function InterviewCard({ title = 'Interview title', slug = null, publishedAt = null, guest = null, interviewer = null }) {
   const router = useRouter()
   const date = formatDate(publishedAt)
-  const guestName = guest || 'Guest'
 
   const handleClick = () => {
     if (slug) router.push(`/interviews/${slug}`)
@@ -24,8 +23,8 @@ export default function InterviewCard({ title = 'Interview title', slug = null, 
       style={slug ? { cursor: 'pointer' } : undefined}
     >
       <div className={styles.itemContent}>
-        {guestName && <div className={styles.itemGuest}>{guestName}</div>}
-        <div className={styles.itemTitle}>{title}</div>
+        {interviewer?.name && <div className={styles.itemGuest}>Интервьюер · {interviewer.name}</div>}
+        <div className={styles.itemTitle}>{guest && <strong>{guest} · </strong>}{title}</div>
       </div>
       {date && <div className={styles.itemDate}>{date}</div>}
     </article>
