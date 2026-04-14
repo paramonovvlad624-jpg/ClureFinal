@@ -155,49 +155,6 @@ export default function InterviewPage({ interview, moreInterviews = [], slug }) 
             {interview.body && <PortableText value={interview.body} components={portableTextComponents} />}
           </article>
 
-          {/* ── Related interviews ── */}
-          {moreInterviews.length > 0 && (
-            <section className={styles.relatedSection}>
-              <h2 className={styles.relatedTitle}>Другие интервью</h2>
-              <div className={styles.relatedGrid}>
-                {moreInterviews.slice(0, 3).map((interview) => (
-                  <Link
-                    key={interview._id}
-                    href={`/interviews/${interview.slug.current}`}
-                    style={{
-                      textDecoration: 'none',
-                      color: 'inherit',
-                      display: 'flex',
-                      flexDirection: 'column',
-                      gap: '8px',
-                    }}
-                  >
-                    {interview.mainImage && (
-                      <div style={{ position: 'relative', aspectRatio: '1', overflow: 'hidden', borderRadius: '4px' }}>
-                        <img
-                          src={urlFor(interview.mainImage).width(400).height(400).auto('format').url()}
-                          alt={interview.title}
-                          style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-                        />
-                      </div>
-                    )}
-                    <span style={{ fontSize: '14px', fontStyle: 'italic', color: 'rgba(255,255,255,0.9)' }}>
-                      {interview.guest}
-                    </span>
-                    <span style={{ fontSize: '16px', fontWeight: '500', lineHeight: '1.2' }} className={styles.title}>
-                      {interview.title}
-                    </span>
-                    {interview.publishedAt && (
-                      <span style={{ fontSize: '12px', color: 'rgba(255,255,255,0.7)' }}>
-                        {formatShortDate(interview.publishedAt)}
-                      </span>
-                    )}
-                  </Link>
-                ))}
-              </div>
-            </section>
-          )}
-
           {/* ── Buy ticket button ── */}
           <div className={styles.ticketButtonSection}>
             <a href="/theory-fest" className={styles.ticketButton}>
