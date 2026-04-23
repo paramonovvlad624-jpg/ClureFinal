@@ -6,7 +6,6 @@ import Hero from '../components/Hero'
 import ArticlesList from '../components/ArticlesList'
 import News from '../components/News'
 import Footer from '../components/Footer'
-import styles from '../components/TheoryFest.module.css'
 
 export default function Home({ page, articles = [], interviews = [], playlists = [] }) {
   const title = page?.title || 'Clure.'
@@ -25,30 +24,6 @@ export default function Home({ page, articles = [], interviews = [], playlists =
       <main style={{ background: '#87c1d3' }}>
         <ArticlesList items={articles} />
       </main>
-
-      <section className={styles.page} style={{ minHeight: 'unset' }}>
-        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '3vw', padding: '60px 24px 60px', textAlign: 'center' }}>
-          <h2 className={styles.title} style={{ fontSize: 'clamp(36px, 7vw, 110px)', margin: 0 }}>Clure Theory Fest</h2>
-          <div className={styles.infoRow} style={{ marginTop: 0 }}>
-            <span>18<br className={styles.mobileBr} /> апреля</span>
-            <span>москва<span className={styles.serifComma}>,</span><br className={styles.mobileBr} /> <a href="https://t.me/npo_melody" target="_blank" rel="noopener noreferrer" className={styles.infoLink}>нпо мелодия</a></span>
-            <span>18+</span>
-          </div>
-          <button
-            id="buy-ticket-btn-home"
-            type="button"
-            className={styles.ticketBtn}
-            style={{ marginTop: '24px' }}
-            data-tc-event="69acc131c2a0a8102c515693"
-            data-tc-token="eyJhbGciOiJIUzI1NiIsImlzcyI6InRpY2tldHNjbG91ZC5ydSIsInR5cCI6IkpXVCJ9.eyJwIjoiNjlhNzI4NWI4YWQwMTllNzFlODljMjliIn0.7Oreh61Lt5J0lbo4pXAw37BV6uokCjEzuLQNCjcs7ZQ"
-          >
-            <picture>
-              <source srcSet={'/images/Buyticketlong.webp'} type="image/webp" />
-              <img src="/images/Buyticketlong.png" alt="Купить билет" className={styles.ticketBtnImg} />
-            </picture>
-          </button>
-        </div>
-      </section>
 
       <Footer />
 

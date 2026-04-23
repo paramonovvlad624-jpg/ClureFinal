@@ -6,8 +6,8 @@ const DEFAULT_LINKS = [
   { href: '/articles', label: 'Статьи' },
   { href: '/interviews', label: 'Интервью' },
   { href: '/playlists', label: 'Плейлисты' },
+  { href: '/meropriyatiya', label: 'Мероприятия' },
   { href: '/about', label: 'О нас' },
-  { href: '/theory-fest', label: 'Theory Fest' },
 ]
 
 export default function Navigation({ links = DEFAULT_LINKS, accentColor }) {

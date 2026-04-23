@@ -13,7 +13,7 @@ const ABOUT_NAV = [
   { href: '/articles', label: 'Статьи' },
   { href: '/interviews', label: 'Интервью' },
   { href: '/playlists', label: 'Плейлисты' },
-  { href: '/theory-fest', label: 'Theory Fest' },
+  { href: '/meropriyatiya', label: 'Мероприятия' },
 ]
 
 const BG_URL = '/images/bg.png'

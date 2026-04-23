@@ -1,5 +1,4 @@
 import Head from 'next/head'
-import Script from 'next/script'
 import Navigation from '../components/Navigation'
 import Footer from '../components/Footer'
 import styles from '../components/TheoryFest.module.css'
@@ -9,6 +8,7 @@ const NAV_LINKS = [
   { href: '/articles', label: 'Статьи' },
   { href: '/interviews', label: 'Интервью' },
   { href: '/playlists', label: 'Плейлисты' },
+  { href: '/meropriyatiya', label: 'Мероприятия' },
   { href: '/about', label: 'О нас' },
 ]
 
@@ -78,23 +78,20 @@ export default function TheoryFestPage() {
           </div>
         </header>
 
-        <div className={styles.ticketSection}>
-          <button
-            id="buy-ticket-btn"
-            type="button"
-            className={styles.ticketBtn}
-            data-tc-event="69acc131c2a0a8102c515693"
-            data-tc-token="eyJhbGciOiJIUzI1NiIsImlzcyI6InRpY2tldHNjbG91ZC5ydSIsInR5cCI6IkpXVCJ9.eyJwIjoiNjlhNzI4NWI4YWQwMTllNzFlODljMjliIn0.7Oreh61Lt5J0lbo4pXAw37BV6uokCjEzuLQNCjcs7ZQ"
-          >
-            <picture>
-              <source srcSet={'/images/Buyticketlong.webp'} type="image/webp" />
-              <img src="/images/Buyticketlong.png" alt="Купить билет" className={styles.ticketBtnImg} />
-            </picture>
-          </button>
-        </div>
-      </div>
+        <section style={{ padding: '80px 24px', display: 'flex', justifyContent: 'center', flexWrap: 'wrap', gap: '50px', alignItems: 'flex-start' }}>
+          <div style={{ transform: 'rotate(-3deg)', boxShadow: '0 15px 40px rgba(0,0,0,0.4)', borderRadius: '4px', overflow: 'hidden', maxWidth: '350px' }}>
+            <img src="/images/A33319-R1-17-18.JPG" alt="Clure event" style={{ width: '100%', height: 'auto', display: 'block' }} />
+          </div>
+          <div style={{ transform: 'rotate(2deg)', boxShadow: '0 15px 40px rgba(0,0,0,0.4)', borderRadius: '4px', overflow: 'hidden', maxWidth: '350px' }}>
+            <img src="/images/A33319-R1-18-19.JPG" alt="Clure event" style={{ width: '100%', height: 'auto', display: 'block' }} />
+          </div>
+          <div style={{ transform: 'rotate(-2.5deg)', boxShadow: '0 15px 40px rgba(0,0,0,0.4)', borderRadius: '4px', overflow: 'hidden', maxWidth: '350px' }}>
+            <img src="/images/A33319-R1-22-23.JPG" alt="Clure event" style={{ width: '100%', height: 'auto', display: 'block' }} />
+          </div>
+        </section>
 
-      <Footer overlayColor="#1b40b0" shadowColor="rgba(27, 64, 176, 0.5)" />
+        <Footer overlayColor="#1b40b0" shadowColor="rgba(27, 64, 176, 0.5)" />
+      </div>
 
       {/* Script: copy height of the top tape image to the /images/3.png copy so they match visually */}
       <script
@@ -113,35 +110,6 @@ export default function TheoryFestPage() {
             if (typeof window !== 'undefined'){
               window.addEventListener('load', function(){ syncHeight(); setTimeout(syncHeight, 300); });
               window.addEventListener('resize', function(){ syncHeight(); });
-            }
-          })();
-        ` }}
-      />
-
-      {/* Defer loading of the tickets widget until user interaction or idle time to reduce TBT */}
-      <script
-        dangerouslySetInnerHTML={{ __html: `
-          (function(){
-            function loadTickets(){
-              if (window.__tc_widget_loaded) return;
-              window.__tc_widget_loaded = true;
-              var s = document.createElement('script');
-              s.src = 'https://ticketscloud.com/static/scripts/widget/tcwidget.js';
-              s.async = true;
-              document.body.appendChild(s);
-            }
-            // Load on user interaction with buy button
-            var btn = document.getElementById('buy-ticket-btn');
-            if (btn) {
-              btn.addEventListener('mouseenter', loadTickets, { once: true, passive: true });
-              btn.addEventListener('focus', loadTickets, { once: true, passive: true });
-              btn.addEventListener('touchstart', loadTickets, { once: true, passive: true });
-            }
-            // Fallback: load during idle after 3s
-            if ('requestIdleCallback' in window) {
-              requestIdleCallback(loadTickets, { timeout: 3000 });
-            } else {
-              setTimeout(loadTickets, 3000);
             }
           })();
         ` }}

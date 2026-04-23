@@ -60,7 +60,7 @@ export default function Hero({ title = 'Clure.', fontFamily, scrollTarget = 'art
         </picture>
       </div>
 
-      {/* Theory Fest banner */}
+      {/* Brand title */}
       <div className={styles.brandWrap}>
         <div
           ref={brandRef}
@@ -78,12 +78,6 @@ export default function Hero({ title = 'Clure.', fontFamily, scrollTarget = 'art
             title
           )}
         </div>
-        <Link href="/theory-fest" className={`${styles.festBadge}${shortTitle ? ' ' + styles.festBadgeShortTitle : ''}`} style={badgeLeft ? { left: badgeLeft } : undefined}>
-          <picture>
-            <source srcSet={'/images/Banner.webp'} type="image/webp" />
-            <img src="/images/Banner.png" alt="Clure Theory Fest" className={styles.festBadgeImg} width="480" height="160" loading="eager" fetchpriority="high" />
-          </picture>
-        </Link>
       </div>
     </section>
   )

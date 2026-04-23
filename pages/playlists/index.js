@@ -9,8 +9,8 @@ const PLAYLISTS_NAV = [
   { href: '/', label: 'Главная' },
   { href: '/articles', label: 'Статьи' },
   { href: '/interviews', label: 'Интервью' },
+  { href: '/meropriyatiya', label: 'Мероприятия' },
   { href: '/about', label: 'О нас' },
-  { href: '/theory-fest', label: 'Theory Fest' },
 ]
 
 const PLATFORM_LABELS = {

@@ -2,7 +2,7 @@ import { useRef, useEffect, useState, useCallback } from 'react'
 import Head from 'next/head'
 import Link from 'next/link'
 import { db } from '../lib/firebase'
-import { collection, addDoc, query, orderBy, limit, getDocs } from 'firebase/firestore'
+import { collection, addDoc, query, orderBy, limit, getDocs, setDoc, doc, getDoc } from 'firebase/firestore'
 import styles from '../components/Game.module.css'
 
 /* ─── constants ─── */
@@ -76,6 +76,30 @@ async function addScoreEntry(entry) {
   try {
     await addDoc(collection(db, LB_COLLECTION), entry)
   } catch { /* ignore */ }
+}
+
+async function saveGameProgress(playerName, progress) {
+  try {
+    const playerKey = playerName.trim().toLowerCase()
+    await setDoc(doc(db, 'player_progress', playerKey), {
+      ...progress,
+      playerName: playerName.trim(),
+      lastSaved: new Date().toISOString(),
+    })
+  } catch (err) {
+    console.error('Failed to save progress:', err)
+  }
+}
+
+async function loadGameProgress(playerName) {
+  try {
+    const playerKey = playerName.trim().toLowerCase()
+    const snap = await getDoc(doc(db, 'player_progress', playerKey))
+    return snap.exists() ? snap.data() : null
+  } catch (err) {
+    console.error('Failed to load progress:', err)
+    return null
+  }
 }
 
 /* ─── preload sprites ─── */
@@ -235,6 +259,8 @@ export default function GamePage() {
   const [playerName, setPlayerName] = useState('')
   const [leaderboard, setLeaderboard] = useState([])
   const [showBoard, setShowBoard] = useState(false)
+  const [savedProgress, setSavedProgress] = useState(null)
+  const [loadingProgress, setLoadingProgress] = useState(false)
 
   /* force body bg to match game page */
   useEffect(() => {
@@ -251,6 +277,16 @@ export default function GamePage() {
   /* load leaderboard on mount */
   useEffect(() => {
     fetchLeaderboard().then(setLeaderboard)
+  }, [])
+
+  /* load saved progress when name is entered */
+  const checkForSavedProgress = useCallback((name) => {
+    if (!name.trim()) return
+    setLoadingProgress(true)
+    loadGameProgress(name).then((progress) => {
+      setSavedProgress(progress)
+      setLoadingProgress(false)
+    })
   }, [])
 
   const initGame = useCallback(() => {
@@ -276,8 +312,23 @@ export default function GamePage() {
   /* go to name input screen */
   const promptName = useCallback(() => {
     setShowBoard(false)
+    setSavedProgress(null)
     setPhase('name')
   }, [])
+
+  const resumeGame = useCallback(() => {
+    if (savedProgress?.playerName) {
+      setPlayerName(savedProgress.playerName)
+      setPhase('name')
+    }
+  }, [savedProgress])
+
+  /* check for saved progress when in name phase */
+  useEffect(() => {
+    if (phase === 'name' && playerName.trim()) {
+      checkForSavedProgress(playerName)
+    }
+  }, [phase, playerName, checkForSavedProgress])
 
   const VLADOS_NAMES = new Set([
     'vlados', 'владос', 'владосик', 'tsarrvladossik',
@@ -325,6 +376,13 @@ export default function GamePage() {
     setFinalScore(finalPts)
     const entry = { name: playerName.trim() || '???', score: finalPts, date: new Date().toLocaleDateString('ru-RU') }
     addScoreEntry(entry).then(() => fetchLeaderboard()).then(setLeaderboard)
+    
+    // Save progress with player name
+    saveGameProgress(playerName, {
+      lastScore: finalPts,
+      completedWaves: gameRef.current?.wave || 1,
+      totalScore: finalPts,
+    })
     setPhase('over')
   }, [playerName])
 
@@ -645,53 +703,65 @@ export default function GamePage() {
             onTouchCancel={handleTouchEnd}
           />
 
-          {/* ── idle screen ── */}
-          {phase === 'idle' && (
-            <div className={styles.overlay}>
-              <h2 className={styles.overlayTitle}>Ковёр</h2>
-              <button className={styles.startBtn} onClick={promptName}>
-                ИГРАТЬ
-              </button>
-              {leaderboard.length > 0 && (
-                <button className={styles.boardToggle} onClick={() => setShowBoard((v) => !v)}>
-                  {showBoard ? 'Скрыть рекорды' : 'Таблица рекордов'}
+            {/* ── loading screen ── */}
+            {loadingProgress && (
+              <div className={styles.overlay}>
+                <h2 className={styles.overlayTitle}>Загрузка...</h2>
+              </div>
+            )}
+
+            {/* ── idle screen ── */}
+            {phase === 'idle' && (
+              <div className={styles.overlay}>
+                <h2 className={styles.overlayTitle}>Ковёр</h2>
+                <button className={styles.startBtn} onClick={promptName}>
+                  ИГРАТЬ
                 </button>
-              )}
-              {showBoard && boardTable}
-            </div>
-          )}
+                {savedProgress && (
+                  <button className={styles.startBtn} onClick={resumeGame}>
+                    ПРОДОЛЖИТЬ ({savedProgress.playerName})
+                  </button>
+                )}
+                {leaderboard.length > 0 && (
+                  <button className={styles.boardToggle} onClick={() => setShowBoard((v) => !v)}>
+                    {showBoard ? 'Скрыть рекорды' : 'Таблица рекордов'}
+                  </button>
+                )}
+                {showBoard && boardTable}
+              </div>
+            )}
 
-          {/* ── name input screen ── */}
-          {phase === 'name' && (
-            <div className={styles.overlay}>
-              <h2 className={styles.overlayTitle}>Как тебя зовут?</h2>
-              <input
-                className={styles.nameInput}
-                type="text"
-                maxLength={16}
-                placeholder="Введи имя"
-                value={playerName}
-                onChange={(e) => setPlayerName(e.target.value)}
-                onKeyDown={(e) => { if (e.key === 'Enter') submitName() }}
-                autoFocus
-              />
-              <button className={styles.startBtn} onClick={submitName} disabled={!playerName.trim()}>
-                НАЧАТЬ
-              </button>
-            </div>
-          )}
+            {/* ── name input screen ── */}
+            {phase === 'name' && (
+              <div className={styles.overlay}>
+                <h2 className={styles.overlayTitle}>Как тебя зовут?</h2>
+                <input
+                  className={styles.nameInput}
+                  type="text"
+                  maxLength={16}
+                  placeholder="Введи имя"
+                  value={playerName}
+                  onChange={(e) => setPlayerName(e.target.value)}
+                  onKeyDown={(e) => { if (e.key === 'Enter') submitName() }}
+                  autoFocus
+                />
+                <button className={styles.startBtn} onClick={submitName} disabled={!playerName.trim()}>
+                  НАЧАТЬ
+                </button>
+              </div>
+            )}
 
-          {/* ── game over screen ── */}
-          {phase === 'over' && (
-            <div className={styles.overlay}>
-              <h2 className={styles.overlayTitle}>Игра окончена</h2>
-              <p className={styles.finalScore}>Очки: {finalScore}</p>
-              {boardTable}
-              <button className={styles.startBtn} onClick={startGame}>
-                ЗАНОВО
-              </button>
-            </div>
-          )}
+            {/* ── game over screen ── */}
+            {phase === 'over' && (
+              <div className={styles.overlay}>
+                <h2 className={styles.overlayTitle}>Игра окончена</h2>
+                <p className={styles.finalScore}>Очки: {finalScore}</p>
+                {boardTable}
+                <button className={styles.startBtn} onClick={startGame}>
+                  ЗАНОВО
+                </button>
+              </div>
+            )}
         </div>
 
         <Link href="/" className={styles.backLink}>

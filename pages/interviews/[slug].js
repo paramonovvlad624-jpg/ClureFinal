@@ -41,8 +41,8 @@ const INTERVIEW_NAV = [
   { href: '/articles', label: 'Статьи' },
   { href: '/interviews', label: 'Интервью' },
   { href: '/playlists', label: 'Плейлисты' },
+  { href: '/meropriyatiya', label: 'Мероприятия' },
   { href: '/about', label: 'О нас' },
-  { href: '/theory-fest', label: 'Theory Fest' },
 ]
 
 const queryBySlug = `*[_type == "interview" && slug.current == $slug][0]{
@@ -154,13 +154,6 @@ export default function InterviewPage({ interview, moreInterviews = [], slug }) 
           <article className={styles.content}>
             {interview.body && <PortableText value={interview.body} components={portableTextComponents} />}
           </article>
-
-          {/* ── Buy ticket button ── */}
-          <div className={styles.ticketButtonSection}>
-            <a href="/theory-fest" className={styles.ticketButton}>
-              Купить Билет
-            </a>
-          </div>
         </main>
       </div>
 

@@ -9,8 +9,8 @@ const INTERVIEWS_NAV = [
   { href: '/', label: 'Главная' },
   { href: '/articles', label: 'Статьи' },
   { href: '/playlists', label: 'Плейлисты' },
+  { href: '/meropriyatiya', label: 'Мероприятия' },
   { href: '/about', label: 'О нас' },
-  { href: '/theory-fest', label: 'Theory Fest' },
 ]
 
 const queryAllInterviews = `*[_type == "interview"]| order(publishedAt desc){
