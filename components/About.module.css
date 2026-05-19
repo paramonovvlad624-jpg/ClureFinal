@@ -156,14 +156,22 @@
     margin-top: 6px;
   }
   .content {
-    padding: 36px 16px 16px;
+    padding: 24px 16px 16px;
   }
   .heading {
     font-size: 24px;
   }
+  .lead {
+    font-size: clamp(18px, 2.5vw, 24px);
+  }
   .text {
-    font-size: 16px;
+    font-size: 14px;
     line-height: 1.6;
+    letter-spacing: -0.01em;
+  }
+  .boxedNote {
+    padding: 16px 16px;
+    font-size: 13px;
   }
   .authors {
     gap: 12px;
@@ -174,7 +182,7 @@
     padding: 10px 14px;
   }
   .authorName {
-    font-size: 16px;
+    font-size: 14px;
   }
   .authorAvatar {
     width: 40px;

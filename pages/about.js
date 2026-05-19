@@ -53,7 +53,7 @@ export default function AboutPage({ authors = [] }) {
             любим музыку
           </p>
           <p className={`${s.text} ${s.boxedNote}`}>
-            designed, assembled, and made in moscow
+            designed, assembled and made in moscow
           </p>
         </div>
 
