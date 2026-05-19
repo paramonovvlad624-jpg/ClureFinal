@@ -1,5 +1,6 @@
+import { useEffect } from 'react'
 import Head from 'next/head'
-import Navigation from '../components/Navigation'
+import { useNavigation } from '../context/NavigationContext'
 import Footer from '../components/Footer'
 import styles from '../components/TheoryFest.module.css'
 
@@ -13,6 +14,14 @@ const NAV_LINKS = [
 ]
 
 export default function TheoryFestPage() {
+  const { setNavLinks, setAccentColor } = useNavigation()
+
+  useEffect(() => {
+    setNavLinks(NAV_LINKS)
+    setAccentColor('rgba(27, 64, 176, 0.75)')
+    return () => setAccentColor(undefined)
+  }, [setNavLinks, setAccentColor])
+
   return (
     <>
       <Head>
@@ -26,7 +35,6 @@ export default function TheoryFestPage() {
       </Head>
 
       <div className={styles.page}>
-        <Navigation links={NAV_LINKS} accentColor="rgba(27, 64, 176, 0.75)" />
 
         <header className={styles.hero}>
           {/* LCP image injected as an actual <img> so browsers prioritize it reliably */}

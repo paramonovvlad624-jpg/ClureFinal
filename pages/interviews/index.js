@@ -1,6 +1,7 @@
+import { useEffect } from 'react'
 import Head from 'next/head'
 import client from '../../lib/sanity'
-import Navigation from '../../components/Navigation'
+import { useNavigation } from '../../context/NavigationContext'
 import Hero from '../../components/Hero'
 import InterviewsList from '../../components/InterviewsList'
 import Footer from '../../components/Footer'
@@ -26,12 +27,17 @@ export async function getStaticProps() {
 }
 
 export default function InterviewsPage({ interviews = [] }) {
+  const { setNavLinks } = useNavigation()
+
+  useEffect(() => {
+    setNavLinks(INTERVIEWS_NAV)
+  }, [setNavLinks])
+
   return (
     <>
       <Head>
         <title>Интервью — Clure</title>
       </Head>
-      <Navigation links={INTERVIEWS_NAV} />
       <Hero title="Интервью." fontFamily="sans" scrollTarget="interviews" badgeLeft="75%" />
 
       <InterviewsList items={interviews} max={100} showAllButton={false} />

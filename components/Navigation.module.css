@@ -22,11 +22,13 @@
   backdrop-filter: blur(4px);
   z-index: 101;
   position: relative;
-  transition: background 200ms ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .toggle:hover {
   background: var(--nav-hover-bg, rgba(246, 248, 251, 0.9));
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(127, 186, 205, 0.3);
 }
 
 /* When the toggle background goes light, draw the bars in the current accent color */
@@ -101,13 +103,18 @@
   content: '→';
   font-size: 18px;
   color: rgba(255, 255, 255, 0.6);
-  transition: transform 120ms ease;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), color 0.3s ease;
 }
 
 .item:hover {
   background: var(--nav-hover-bg, rgba(246, 248, 251, 0.9));
   color: var(--nav-accent, #7fbacd);
-  transform: translateX(4px);
+  transform: translateX(6px);
+}
+
+.item:hover::after {
+  color: var(--nav-accent, #7fbacd);
+  transform: translateX(2px);
 }
 
 /* Mobile: smaller toggle, full-width dropdown */

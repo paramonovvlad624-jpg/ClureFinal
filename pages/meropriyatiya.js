@@ -1,6 +1,7 @@
+import { useEffect } from 'react'
 import Head from 'next/head'
 import Link from 'next/link'
-import Navigation from '../components/Navigation'
+import { useNavigation } from '../context/NavigationContext'
 import Hero from '../components/Hero'
 import Footer from '../components/Footer'
 import styles from '../components/TheoryFest.module.css'
@@ -14,12 +15,17 @@ const MEROPRIYATIYA_NAV = [
 ]
 
 export default function MeropriyatiyaPage() {
+  const { setNavLinks } = useNavigation()
+
+  useEffect(() => {
+    setNavLinks(MEROPRIYATIYA_NAV)
+  }, [setNavLinks])
+
   return (
     <>
       <Head>
         <title>Мероприятия — Clure</title>
       </Head>
-      <Navigation links={MEROPRIYATIYA_NAV} />
       <Hero title="Мероприятия." fontFamily="sans" scrollTarget="events" />
 
       <section className={styles.page} style={{ minHeight: 'auto' }} id="events">

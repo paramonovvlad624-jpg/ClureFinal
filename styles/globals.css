@@ -44,3 +44,47 @@ main {
 }
 
 h1, h2, h3, h4, h5, h6, p { margin: 0; }
+
+/* Scroll Animation Styles - fade and slide from below as you scroll */
+.animate-on-scroll {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.animate-on-scroll:not(.animate-in) {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: none;
+}
+
+.animate-on-scroll.animate-in {
+  animation: slideUp 0.6s ease-out forwards;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Button Animations */
+button, a[role="button"], [role="button"],
+.allButton, .toggle {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+button:hover, a[role="button"]:hover, [role="button"]:hover,
+.allButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+button:active, a[role="button"]:active, [role="button"]:active {
+  transform: translateY(0);
+}
+

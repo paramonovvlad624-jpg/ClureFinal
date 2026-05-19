@@ -1,6 +1,7 @@
+import { useEffect } from 'react'
 import Head from 'next/head'
 import client from '../../lib/sanity'
-import Navigation from '../../components/Navigation'
+import { useNavigation } from '../../context/NavigationContext'
 import Hero from '../../components/Hero'
 import Footer from '../../components/Footer'
 import s from '../../components/Playlists.module.css'
@@ -22,12 +23,17 @@ const PLATFORM_LABELS = {
 }
 
 export default function PlaylistsPage({ playlists = [] }) {
+  const { setNavLinks } = useNavigation()
+
+  useEffect(() => {
+    setNavLinks(PLAYLISTS_NAV)
+  }, [setNavLinks])
+
   return (
     <>
       <Head>
         <title>Плейлисты — Clure</title>
       </Head>
-      <Navigation links={PLAYLISTS_NAV} />
       <Hero title="Плейлисты." fontFamily="sans" scrollTarget="playlists-content" shortTitle />
 
       {playlists.length === 0 ? (

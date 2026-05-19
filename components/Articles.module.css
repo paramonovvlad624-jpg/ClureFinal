@@ -32,6 +32,13 @@
   overflow: hidden;
   background: #c8dde5;
   box-shadow: 0 4px 16px rgba(100, 170, 200, 0.35);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+.card:hover {
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 8px 24px rgba(100, 170, 200, 0.45);
 }
 
 .cardLink {
@@ -55,11 +62,7 @@
 }
 
 /* Hover: slight zoom (blur removed) */
-.card:hover .image {
-  transform: scale(1.04);
-}
-
-.imagePlaceholder {
+.image {
   position: absolute;
   inset: 0;
   background: linear-gradient(160deg, #9fd1de 0%, #7fbacd 100%);
@@ -206,14 +209,20 @@
   letter-spacing: -0.02em;
   text-decoration: none;
   text-align: center;
-  transition: background 120ms ease, color 120ms ease;
   box-sizing: border-box;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .allButton:hover {
   background: #f6f8fb;
   color: #7fbacd;
   border-color: #7fbacd;
+  transform: translateY(-3px);
+  box-shadow: 0 12px 24px rgba(127, 186, 205, 0.3);
+}
+
+.allButton:active {
+  transform: translateY(-1px);
 }
 
 /* ─── Responsive ─── */

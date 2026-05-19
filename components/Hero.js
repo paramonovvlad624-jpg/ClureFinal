@@ -1,43 +1,10 @@
-import { useEffect, useRef } from 'react'
 import Link from 'next/link'
 import styles from './Hero.module.css'
 
 const BG_URL = '/images/bg.png'
 
 export default function Hero({ title = 'Clure.', fontFamily, scrollTarget = 'articles', shortTitle = false, badgeLeft }) {
-  const brandRef = useRef(null)
 
-  useEffect(() => {
-    const el = brandRef.current
-    if (!el) return
-
-    // Disable parallax on narrow viewports — mobile scroll events are
-    // batched during momentum scrolling which makes JS parallax janky.
-    const isMobile = () => window.innerWidth <= 600
-
-    let ticking = false
-    const onScroll = () => {
-      if (isMobile()) return
-      if (!ticking) {
-        ticking = true
-        requestAnimationFrame(() => {
-          const y = window.scrollY
-          const speed = 0.35
-          el.style.transform = `translateY(${y * speed}px)`
-          el.style.opacity = Math.max(1 - y / 900, 0)
-          ticking = false
-        })
-      }
-    }
-
-    window.addEventListener('scroll', onScroll, { passive: true })
-    return () => {
-      window.removeEventListener('scroll', onScroll)
-      // Reset styles when cleaning up so resizing doesn't leave stale transforms
-      el.style.transform = ''
-      el.style.opacity = ''
-    }
-  }, [])
 
   const brandClass = fontFamily === 'sans'
     ? `${styles.brand} ${styles.brandSans}`
@@ -63,7 +30,6 @@ export default function Hero({ title = 'Clure.', fontFamily, scrollTarget = 'art
       {/* Brand title */}
       <div className={styles.brandWrap}>
         <div
-          ref={brandRef}
           className={brandClass}
           aria-label={title}
           onClick={handleClick}

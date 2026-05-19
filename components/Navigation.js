@@ -1,26 +1,19 @@
 import { useState } from 'react'
 import Link from 'next/link'
+import { useNavigation } from '../context/NavigationContext'
 import styles from './Navigation.module.css'
 
-const DEFAULT_LINKS = [
-  { href: '/articles', label: 'Статьи' },
-  { href: '/interviews', label: 'Интервью' },
-  { href: '/playlists', label: 'Плейлисты' },
-  { href: '/meropriyatiya', label: 'Мероприятия' },
-  { href: '/about', label: 'О нас' },
-]
-
-export default function Navigation({ links = DEFAULT_LINKS, accentColor }) {
+export default function Navigation() {
+  const { navLinks, accentColor } = useNavigation()
   const [open, setOpen] = useState(false)
 
-  // expose accent color + hover-bg as CSS variables (do not set `background` inline)
   const accentStyleWithVar = accentColor ? { '--nav-accent': accentColor, '--nav-hover-bg': '#ffffff' } : undefined
 
   return (
     <nav className={styles.nav} aria-label="Main navigation">
       <button
         className={styles.toggle}
-      style={accentStyleWithVar}
+        style={accentStyleWithVar}
         onClick={() => setOpen((v) => !v)}
         aria-expanded={open}
         aria-label="Toggle navigation"
@@ -31,14 +24,14 @@ export default function Navigation({ links = DEFAULT_LINKS, accentColor }) {
       </button>
 
       <ul className={`${styles.list} ${open ? styles.listOpen : ''}`}>
-        {links.map((link) => (
+        {navLinks.map((link) => (
           <li key={link.href}>
-          <Link
-            href={link.href}
-            className={styles.item}
-            style={accentStyleWithVar}
-            onClick={() => setOpen(false)}
-          >
+            <Link
+              href={link.href}
+              className={styles.item}
+              style={accentStyleWithVar}
+              onClick={() => setOpen(false)}
+            >
               {link.label}
             </Link>
           </li>

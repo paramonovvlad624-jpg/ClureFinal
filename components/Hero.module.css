@@ -42,7 +42,18 @@
   color: #f6f8fb;
   user-select: none;
   font-variation-settings: 'XROT' 0, 'YROT' 0;
-  will-change: transform, opacity;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.brand:hover {
+  transform: scale(1.02);
+  color: #ffffff;
+  box-shadow: none;
+}
+
+.brand:active {
+  transform: scale(0.98);
 }
 
 .brandSans {

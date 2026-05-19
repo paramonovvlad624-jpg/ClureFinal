@@ -1,7 +1,7 @@
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useEffect } from 'react'
 import Head from 'next/head'
 import client from '../../lib/sanity'
-import Navigation from '../../components/Navigation'
+import { useNavigation } from '../../context/NavigationContext'
 import Hero from '../../components/Hero'
 import ArticlesList from '../../components/ArticlesList'
 import Footer from '../../components/Footer'
@@ -16,9 +16,14 @@ const ARTICLES_NAV = [
 ]
 
 export default function ArticlesPage({ articles = [] }) {
+  const { setNavLinks } = useNavigation()
   const [authorFilter, setAuthorFilter] = useState('all')
   const [dateSort, setDateSort] = useState('newest')
   const [filtersOpen, setFiltersOpen] = useState(false)
+
+  useEffect(() => {
+    setNavLinks(ARTICLES_NAV)
+  }, [setNavLinks])
 
   const authors = useMemo(() => {
     const names = [...new Set(articles.map((a) => a.author?.name).filter(Boolean))]
@@ -43,7 +48,6 @@ export default function ArticlesPage({ articles = [] }) {
       <Head>
         <title>Статьи — Clure</title>
       </Head>
-      <Navigation links={ARTICLES_NAV} />
       <Hero title="Статьи." fontFamily="sans" scrollTarget="articles-filter" badgeLeft="75%" />
 
       {/* ── Filters ── */}

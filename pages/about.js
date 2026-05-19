@@ -1,9 +1,10 @@
+import { useEffect } from 'react'
 import Head from 'next/head'
 import Link from 'next/link'
 import client from '../lib/sanity'
 import urlFor from '../lib/imageUrl'
 import slugify from '../lib/slugify'
-import Navigation from '../components/Navigation'
+import { useNavigation } from '../context/NavigationContext'
 import Hero from '../components/Hero'
 import Footer from '../components/Footer'
 import s from '../components/About.module.css'
@@ -19,12 +20,17 @@ const ABOUT_NAV = [
 const BG_URL = '/images/bg.png'
 
 export default function AboutPage({ authors = [] }) {
+  const { setNavLinks } = useNavigation()
+
+  useEffect(() => {
+    setNavLinks(ABOUT_NAV)
+  }, [setNavLinks])
+
   return (
     <>
       <Head>
         <title>О нас — Clure</title>
       </Head>
-      <Navigation links={ABOUT_NAV} />
       <Hero title="О нас." fontFamily="sans" scrollTarget="about-content" />
 
       <div id="about-content" className={s.wrapper}>
