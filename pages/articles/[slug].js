@@ -4,7 +4,6 @@ import { PortableText } from '@portabletext/react'
 import client from '../../lib/sanity'
 import urlFor from '../../lib/imageUrl'
 import slugify from '../../lib/slugify'
-import Navigation from '../../components/Navigation'
 import Footer from '../../components/Footer'
 import styles from '../../components/ArticlePage.module.css'
 
@@ -36,15 +35,6 @@ const portableTextComponents = {
     },
   },
 }
-
-const ARTICLE_NAV = [
-  { href: '/', label: 'Главная' },
-  { href: '/articles', label: 'Статьи' },
-  { href: '/interviews', label: 'Интервью' },
-  { href: '/playlists', label: 'Плейлисты' },
-  { href: '/meropriyatiya', label: 'Мероприятия' },
-  { href: '/about', label: 'О нас' },
-]
 
 const queryBySlug = `*[_type == "article" && slug.current == $slug][0]{
   _id, title, excerpt, body, publishedAt, mainImage, author->{name, slug, image}, playlist->{title, url, platform}
@@ -114,8 +104,6 @@ export default function ArticlePage({ article, moreArticles = [], slug }) {
           }}
         />
       </Head>
-      <Navigation links={ARTICLE_NAV} />
-
       <div className={styles.page}>
         <main className={styles.body}>
           {/* ── Header ── */}

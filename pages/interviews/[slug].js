@@ -3,7 +3,6 @@ import Link from 'next/link'
 import { PortableText } from '@portabletext/react'
 import client from '../../lib/sanity'
 import urlFor from '../../lib/imageUrl'
-import Navigation from '../../components/Navigation'
 import Footer from '../../components/Footer'
 import styles from '../../components/InterviewPage.module.css'
 
@@ -35,15 +34,6 @@ const portableTextComponents = {
     },
   },
 }
-
-const INTERVIEW_NAV = [
-  { href: '/', label: 'Главная' },
-  { href: '/articles', label: 'Статьи' },
-  { href: '/interviews', label: 'Интервью' },
-  { href: '/playlists', label: 'Плейлисты' },
-  { href: '/meropriyatiya', label: 'Мероприятия' },
-  { href: '/about', label: 'О нас' },
-]
 
 const queryBySlug = `*[_type == "interview" && slug.current == $slug][0]{
   _id, title, excerpt, body, publishedAt, mainImage, guest, interviewer->{name}
@@ -111,8 +101,6 @@ export default function InterviewPage({ interview, moreInterviews = [], slug }) 
           }}
         />
       </Head>
-      <Navigation links={INTERVIEW_NAV} />
-
       <div className={styles.page}>
         <main className={styles.body}>
           {/* ── Header ── */}

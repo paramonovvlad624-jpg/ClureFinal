@@ -181,12 +181,12 @@
 }
 
 .richText p {
-  margin: 0;
+  margin: 0 0 1.2em;
 }
 
 /* Blank spacer between paragraphs */
-.richText p + p {
-  margin-top: 0;
+.richText p:last-child {
+  margin-bottom: 0;
 }
 
 .richText a,
@@ -421,6 +421,7 @@
 
   .introText {
     font-size: 16px;
+    font-weight: 400;
   }
 
   .articleSection {
@@ -433,6 +434,7 @@
 
   .richText {
     font-size: 16px;
+    font-weight: 600;
   }
 
   .moreSection {

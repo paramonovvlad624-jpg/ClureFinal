@@ -159,7 +159,7 @@
   letter-spacing: -0.4px;
   color: var(--color-white);
   text-align: justify;
-  margin: 0 0 1.2em;
+  margin: 0 0 1.4em;
 }
 
 .rtParagraph:last-child {
@@ -367,6 +367,7 @@
 
   .introText {
     font-size: 16px;
+    font-weight: 400;
   }
 
   .content {
@@ -376,6 +377,7 @@
 
   .rtParagraph {
     font-size: 16px;
+    font-weight: 600;
   }
 
   .rtH2 {
